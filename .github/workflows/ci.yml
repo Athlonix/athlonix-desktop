@@ -1,0 +1,22 @@
+---
+name: Maven CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    container: maven:3.9-eclipse-temurin-21-alpine
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run tests with Maven
+        run: mvn -B test --file pom.xml
