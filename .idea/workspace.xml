@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0588a373-c68e-4ea5-8ea0-5c1dee0d8210" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/athlonix/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/athlonix/MainTest.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/style/cupertino-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/style/cupertino-light.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/style/dracula.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/style/nord-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/style/nord-light.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/style/primer-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/style/primer-light.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/athlonix/athlonixdesktop/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/athlonix/athlonixdesktop/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/athlonix/athlonixdesktop/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/athlonix/athlonixdesktop/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,16 +39,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HelloApplication.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/samya/AppData/Local/SceneBuilder/SceneBuilder.exe",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\main\school\3_year\annual_project\athlonix-desktop\src\main\resources" />
+      <recent name="C:\main\school\3_year\annual_project\athlonix-desktop\src\main\resources\athlonix\athlonixdesktop\style" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="athlonix.athlonixdesktop.HelloApplication" />
@@ -82,6 +99,7 @@
       <updated>1713100609218</updated>
       <workItem from="1713100610255" duration="73000" />
       <workItem from="1713100699161" duration="28000" />
+      <workItem from="1713100873081" duration="2808000" />
     </task>
     <servers />
   </component>
