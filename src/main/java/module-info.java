@@ -5,6 +5,8 @@ module athlonix.athlonixdesktop {
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
 
-    opens athlonix.athlonixdesktop to javafx.fxml;
-    exports athlonix.athlonixdesktop;
+    opens athlonix to javafx.fxml;
+    exports athlonix;
+    exports athlonix.controllers;
+    opens athlonix.controllers to javafx.fxml;
 }

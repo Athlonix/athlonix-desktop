@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0588a373-c68e-4ea5-8ea0-5c1dee0d8210" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/style/cupertino-dark.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/style/cupertino-light.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/style/dracula.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/style/nord-dark.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/style/nord-light.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/style/primer-dark.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/style/primer-light.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/athlonix/athlonixdesktop/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/athlonix/athlonixdesktop/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/athlonix/athlonixdesktop/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/athlonix/athlonixdesktop/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/athlonix/athlonixdesktop/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/athlonix/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/athlonix/athlonixdesktop/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/athlonix/controllers/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/athlonix/athlonixdesktop/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +39,7 @@
   "keyToString": {
     "Application.HelloApplication.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
@@ -57,17 +54,21 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\main\school\3_year\annual_project\athlonix-desktop\src\main\resources\view" />
       <recent name="C:\main\school\3_year\annual_project\athlonix-desktop\src\main\resources" />
       <recent name="C:\main\school\3_year\annual_project\athlonix-desktop\src\main\resources\athlonix\athlonixdesktop\style" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="athlonix.athlonixdesktop.HelloApplication" />
+      <option name="MAIN_CLASS_NAME" value="athlonix.HelloApplication" />
       <module name="athlonix-desktop" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="athlonix.athlonixdesktop.*" />
+          <option name="PATTERN" value="athlonix.controllers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -99,7 +100,7 @@
       <updated>1713100609218</updated>
       <workItem from="1713100610255" duration="73000" />
       <workItem from="1713100699161" duration="28000" />
-      <workItem from="1713100873081" duration="2808000" />
+      <workItem from="1713100873081" duration="4949000" />
     </task>
     <servers />
   </component>
