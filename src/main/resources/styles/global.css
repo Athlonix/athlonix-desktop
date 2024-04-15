@@ -1,0 +1,4 @@
+#login_image {
+    -fx-background-image:url("../images/basket.jpg");
+    -fx-background-size:cover;
+}

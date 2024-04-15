@@ -1,23 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../styles/primer-light.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <AnchorPane id="-color-success-emphasis" prefHeight="500.0" prefWidth="310.0" style="-fx-background-color: -color-accent-6;" styleClass="default-color4" stylesheets="@../styles/primer-light.css" BorderPane.alignment="CENTER" />
+      <AnchorPane id="login_image" prefHeight="500.0" prefWidth="310.0" style="-fx-background-color: -color-accent-6;" styleClass="default-color4" BorderPane.alignment="CENTER" />
    </left>
    <right>
       <AnchorPane prefHeight="500.0" prefWidth="491.0" styleClass="-color-base-7" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="155.0" layoutY="202.0" />
-            <PasswordField layoutX="155.0" layoutY="272.0" />
-            <Text layoutX="189.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-1" text="Athlonix" />
+            <TextField layoutX="143.0" layoutY="192.0" prefHeight="36.0" prefWidth="204.0" promptText="email" styleClass="text-input" />
+            <Text layoutX="201.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-1" text="Athlonix" />
+            <ImageView fitHeight="61.0" fitWidth="48.0" layoutX="143.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/athlonix_flame.png" />
+               </image>
+            </ImageView>
+            <PasswordField layoutX="143.0" layoutY="264.0" prefHeight="36.0" prefWidth="203.0" promptText="password" styleClass="password-field" />
+            <Text layoutX="145.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="accent" text="Mot de passe oublié ?" underline="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
          </children>
       </AnchorPane>
    </right>
+   <stylesheets>
+      <URL value="@../styles/primer-light.css" />
+      <URL value="@../styles/global.css" />
+   </stylesheets>
 </BorderPane>
