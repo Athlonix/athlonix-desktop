@@ -4,6 +4,8 @@ module athlonix.athlonixdesktop {
 
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
+    requires java.net.http;
+    requires com.google.gson;
 
     opens athlonix to javafx.fxml;
     exports athlonix;
