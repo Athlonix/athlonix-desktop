@@ -5,15 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>athlonix</groupId>
-        <artifactId>athlonix-desktop</artifactId>
+        <artifactId>plugins</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>plugins</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>TestPlugin</module>
-    </modules>
+    <artifactId>TestPlugin</artifactId>
 
     <properties>
         <maven.compiler.source>22</maven.compiler.source>

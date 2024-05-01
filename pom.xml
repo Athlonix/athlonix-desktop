@@ -10,8 +10,9 @@
   <packaging>pom</packaging>
   <name>athlonix-desktop</name>
   <modules>
+    <module>app</module>
     <module>plugins</module>
-    <module>core</module>
+    <module>plugins/TestPlugin</module>
   </modules>
 
   <properties>
