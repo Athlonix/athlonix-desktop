@@ -45,17 +45,22 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Text fx:id="emailError" layoutX="136.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Champ d'erreur">
+            <Text fx:id="emailError" layoutX="136.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="229.0">
                <font>
                   <Font size="11.0" />
                </font>
             </Text>
-            <Text fx:id="passwordError" layoutX="134.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Champ d'erreur">
+            <Text fx:id="passwordError" layoutX="134.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="234.0">
                <font>
                   <Font size="11.0" />
                </font>
             </Text>
             <Button fx:id="loginButton" layoutX="135.0" layoutY="351.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="118.0" style="-fx-background-color: -color-base-8; -fx-text-fill: -color-base-0;" text="Connexion" />
+            <Text fx:id="globalError" layoutX="133.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="234.826171875">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </right>

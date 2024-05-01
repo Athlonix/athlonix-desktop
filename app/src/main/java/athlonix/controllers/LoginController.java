@@ -1,6 +1,7 @@
 package athlonix.controllers;
 
 import athlonix.auth.Authenticator;
+import athlonix.auth.LoginException;
 import athlonix.validators.EmailValidator;
 import athlonix.validators.PasswordValidator;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ public class LoginController {
     public Text forgotPassword;
     public Text emailError;
     public Text passwordError;
+    public Text globalError;
     public Button loginButton;
     @FXML
     public TextField email;
@@ -44,12 +46,13 @@ public class LoginController {
             SetPasswordError(e.getMessage());
         }
 
-        Authenticator auth = new Authenticator();
         try {
-
-            auth.login(emailText,passwordText);
+            Authenticator.login(emailText,passwordText);
+            ResetGlobalStatus();
+        } catch (LoginException e) {
+            SetGlobalError(e.getMessage());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            SetGlobalError("Erreur du serveur lors de l'authentification");
         }
 
     }
@@ -62,8 +65,8 @@ public class LoginController {
 
     private void ResetEmailStatus() {
         emailError.setText("");
-        emailError.setStyle("-fx-fill: -color-base-8");
-        email.setStyle("-fx-border-color: -color-base-8");
+        emailError.setStyle("-fx-fill: none");
+        email.setStyle("-fx-border-color: none");
     }
 
     private void SetPasswordError(String error) {
@@ -74,8 +77,18 @@ public class LoginController {
 
     private void ResetPasswordStatus() {
         passwordError.setText("");
-        passwordError.setStyle("-fx-fill: -color-base-8");
-        password.setStyle("-fx-border-color: -color-base-8");
+        passwordError.setStyle("-fx-fill: none");
+        password.setStyle("-fx-border-color: none");
+    }
+
+    private void SetGlobalError(String error) {
+        globalError.setStyle("-fx-fill: -color-danger-5");
+        globalError.setText(error);
+    }
+
+    private void ResetGlobalStatus() {
+        globalError.setText("");
+        globalError.setStyle("-fx-fill: none");
     }
 
 
