@@ -12,9 +12,10 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 
 public class Authenticator {
-    final static String API_URL = "http://localhost:3101/";
+    final static String API_URL = "http://localhost:3101";
     static String AUTH_TOKEN = "";
-    static private Credentials user;
+    static String USER_ID;
+    static String USER_NAME;
 
 
     public static void login(String email,String password) throws URISyntaxException, IOException, InterruptedException {
@@ -35,19 +36,28 @@ public class Authenticator {
                 .POST(bodyPublisher)
                 .timeout(Duration.ofSeconds(10))
                 .build();
-        HttpClient httpClient = HttpClient.newBuilder()
-                .cookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ALL)).build();
+        HttpClient httpClient = HttpClient.newBuilder().build();
 
         HttpResponse<String> loginResponse =  httpClient.send(loginRequest, HttpResponse.BodyHandlers.ofString());
+
+        if(loginResponse.statusCode() == 401) {
+            throw new RuntimeException("Identifiants invalides");
+        }
+
         String responseString = loginResponse.body();
 
         Gson gson = new Gson();
 
-        JsonElement userJson = gson.fromJson(responseString, JsonElement.class);
+        JsonElement response = gson.fromJson(responseString, JsonElement.class);
 
-        JsonObject jsonObject = userJson.getAsJsonObject();
+        JsonObject responseJson = response.getAsJsonObject();
+        JsonObject userJson = responseJson.get("user").getAsJsonObject();
 
-        AUTH_TOKEN = jsonObject.get("token").getAsString();
+        USER_NAME = userJson.get("username").getAsString();
+        USER_ID = userJson.get("id").getAsString();
+        AUTH_TOKEN = responseJson.get("token").getAsString();
+
+
     }
 
 }
