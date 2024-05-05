@@ -6,10 +6,17 @@ import athlonix.validators.EmailValidator;
 import athlonix.validators.PasswordValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class LoginController {
     public PasswordField password;
@@ -49,6 +56,8 @@ public class LoginController {
         try {
             Authenticator.login(emailText,passwordText);
             ResetGlobalStatus();
+            openDashboard();
+
         } catch (LoginException e) {
             SetGlobalError(e.getMessage());
         } catch (Exception e) {
@@ -89,6 +98,21 @@ public class LoginController {
     private void ResetGlobalStatus() {
         globalError.setText("");
         globalError.setStyle("-fx-fill: none");
+    }
+
+    private void openDashboard() throws IOException, IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/dashboard-view.fxml"));
+        Parent root = fxmlLoader.load();
+
+        DashboardController dashboardController = fxmlLoader.getController();
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle("dashboard");
+        stage.setScene(scene);
+        stage.show();
+
     }
 
 
