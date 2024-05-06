@@ -1,8 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="athlonix.controllers.DashboardController">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Pane prefHeight="58.0" prefWidth="1000.0" style="-fx-background-color: -color-accent-4;" styleClass="default-color1" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="36.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Athlonix" />
+            <MenuButton layoutX="851.0" layoutY="10.0" mnemonicParsing="false" text="Mon compte">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Parametres" />
+                <MenuItem mnemonicParsing="false" text="Plugins" />
+                  <MenuItem mnemonicParsing="false" style="-fx-fill: -color-danger-6;" styleClass=".text.danger" text="Deconnexion" />
+              </items>
+            </MenuButton>
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+      </Pane>
+   </top>
+   <left>
+      <Pane prefHeight="542.0" prefWidth="200.0" style="-fx-border-color: -color-border-default; -fx-border-image-width: 1;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutY="146.0" prefHeight="250.0" prefWidth="200.0" styleClass="-color-accent-3">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="200.0" style="-fx-background-color: -color-accent-2;" text="Employee">
+                     <VBox.margin>
+                        <Insets bottom="16.0" />
+                     </VBox.margin></Button>
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="200.0" style="-fx-background-color: -color-accent-2;" text="Activites">
+                     <VBox.margin>
+                        <Insets bottom="16.0" />
+                     </VBox.margin></Button>
+                  <Button layoutX="10.0" layoutY="57.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="200.0" style="-fx-background-color: -color-accent-2;" text="Cours">
+                     <VBox.margin>
+                        <Insets bottom="16.0" />
+                     </VBox.margin></Button>
+                  <Button layoutX="10.0" layoutY="104.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="200.0" style="-fx-background-color: -color-accent-2;" text="Tournois">
+                     <VBox.margin>
+                        <Insets bottom="16.0" />
+                     </VBox.margin></Button>
+               </children>
+               <padding>
+                  <Insets left="16.0" right="16.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets left="16.0" />
+         </padding>
+      </Pane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: -color-danger-6;" text="Page 1" wrappingWidth="223.826171875">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Text>
+               </children></StackPane>
+         </children>
+      </AnchorPane>
+   </center>
+   <stylesheets>
+      <URL value="@../styles/global.css" />
+      <URL value="@../styles/primer-light.css" />
+   </stylesheets>
+</BorderPane>
