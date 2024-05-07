@@ -12,7 +12,6 @@
   <modules>
     <module>app</module>
     <module>plugins</module>
-    <module>plugins/TestPlugin</module>
   </modules>
 
   <properties>
