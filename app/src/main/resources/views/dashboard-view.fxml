@@ -64,8 +64,8 @@
       </Pane>
    </left>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <StackPane fx:id="contentArea" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+      <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <StackPane fx:id="contentArea" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="home">
                <font>
