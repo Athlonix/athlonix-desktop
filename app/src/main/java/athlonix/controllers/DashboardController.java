@@ -21,4 +21,10 @@ public class DashboardController {
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
+
+    public void showActivityPage() throws IOException {
+        Parent fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/activity-page.fxml")));
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(fxml);
+    }
 }

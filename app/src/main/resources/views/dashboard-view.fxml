@@ -40,7 +40,7 @@
                      <VBox.margin>
                         <Insets bottom="16.0" />
                      </VBox.margin></Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="200.0" style="-fx-background-color: -color-accent-2;" text="Activites">
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showActivityPage" prefHeight="47.0" prefWidth="200.0" style="-fx-background-color: -color-accent-2;" text="Activites">
                      <VBox.margin>
                         <Insets bottom="16.0" />
                      </VBox.margin></Button>

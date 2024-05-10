@@ -19,8 +19,6 @@ public class Authenticator {
 
 
     public static void login(String email,String password) throws URISyntaxException, IOException, InterruptedException, LoginException {
-        URI lo = new URI(API_URL + "/auth/login");
-
         JsonObject loginRequestBody = new JsonObject();
 
         loginRequestBody.addProperty("email",email);
@@ -28,17 +26,7 @@ public class Authenticator {
 
         String loginRequestBodyJson = new Gson().toJson(loginRequestBody);
 
-        HttpRequest.BodyPublisher bodyPublisher = HttpRequest.BodyPublishers.ofString(loginRequestBodyJson);
-
-        HttpRequest loginRequest = HttpRequest.newBuilder()
-                .uri(lo)
-                .header("Content-Type","application/json")
-                .POST(bodyPublisher)
-                .timeout(Duration.ofSeconds(10))
-                .build();
-        HttpClient httpClient = HttpClient.newBuilder().build();
-
-        HttpResponse<String> loginResponse =  httpClient.send(loginRequest, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> loginResponse =  APIQuerier.httpQuery("/auth/login",loginRequestBodyJson,"POST");
 
         if(loginResponse.statusCode() == 401) {
             throw new LoginException("Identifiants invalides");
