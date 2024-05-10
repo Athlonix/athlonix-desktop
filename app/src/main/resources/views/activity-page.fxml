@@ -15,32 +15,32 @@
    <children>
        <TableView fx:id="activitiesTable" layoutX="33.0" layoutY="71.0" prefHeight="633.0" prefWidth="1145.0" styleClass="striped">
            <columns>
-               <TableColumn fx:id="nameColumn" minWidth="81.0" prefWidth="106.0" text="Nom">
+               <TableColumn fx:id="nameColumn" minWidth="81.0" prefWidth="217.0" text="Nom">
                    <cellValueFactory>
                        <PropertyValueFactory property="queries" />
                    </cellValueFactory>
                </TableColumn>
-               <TableColumn fx:id="sportColumn" minWidth="30.0" prefWidth="112.0" styleClass="align-right" text="Sport">
+               <TableColumn fx:id="sportColumn" minWidth="30.0" prefWidth="144.0" styleClass="align-right" text="Sport">
                    <cellValueFactory>
                        <PropertyValueFactory property="latency" />
                    </cellValueFactory>
                </TableColumn>
-               <TableColumn fx:id="startColumn" prefWidth="97.0" styleClass="align-right" text="Debut">
+               <TableColumn fx:id="startColumn" prefWidth="231.0" styleClass="align-right" text="Debut">
                    <cellValueFactory>
                        <PropertyValueFactory property="requests" />
                    </cellValueFactory>
                </TableColumn>
-            <TableColumn fx:id="endColumn" prefWidth="105.0" styleClass="align-right" text="Fin">
+            <TableColumn fx:id="endColumn" prefWidth="216.0" styleClass="align-right" text="Fin">
                <cellValueFactory>
                   <PropertyValueFactory property="requests" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="recurrenceColumn" prefWidth="128.0" styleClass="align-right" text="Recurrence">
+            <TableColumn fx:id="recurrenceColumn" prefWidth="148.0" styleClass="align-right" text="Recurrence">
                <cellValueFactory>
                   <PropertyValueFactory property="requests" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="actionColumn" prefWidth="186.0" styleClass="align-right" text="Actions">
+            <TableColumn fx:id="actionColumn" prefWidth="185.0" styleClass="align-center" text="Actions">
                <cellValueFactory>
                   <PropertyValueFactory property="requests" />
                </cellValueFactory>

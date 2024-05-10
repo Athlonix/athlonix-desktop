@@ -13,9 +13,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -109,8 +111,41 @@ public class ActivityController implements Initializable {
         });
 
         actionColumn.setCellValueFactory(cellData -> {
-            return new SimpleStringProperty("test");
+            return new SimpleStringProperty("dummy");
         });
+
+        Callback<TableColumn<Activity, String>, TableCell<Activity, String>> cellFoctory = (TableColumn<Activity, String> param) -> {
+            final TableCell<Activity, String> cell = new TableCell<Activity, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+
+                    } else {
+
+                        Button button = new Button("Plus");
+                        button.getStyleClass().add("accent");
+                        button.getStyleClass().add("button-outlined");
+
+                        button.setOnAction(event -> {
+                            Activity i = getTableView().getItems().get(getIndex());
+                            System.out.println("Action clicked for item: " + i.getName());
+                        });
+
+                        setText(null);
+                        setGraphic(button);
+
+                    }
+                }
+
+            };
+
+            return cell;
+        };
+
+        actionColumn.setCellFactory(cellFoctory);
 
         activitiesTable.setItems(list);
 

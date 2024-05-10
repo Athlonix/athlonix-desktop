@@ -39,19 +39,19 @@ public class LoginController {
         String emailText = email.getText();
         String passwordText = password.getText();
 
-        try {
-            EmailValidator.validate(emailText);
-            ResetEmailStatus();
-        } catch (Exception e) {
-            SetEmailError(e.getMessage());
-        }
-
-        try {
-            PasswordValidator.validate(passwordText);
-            ResetPasswordStatus();
-        } catch (Exception e) {
-            SetPasswordError(e.getMessage());
-        }
+//        try {
+//            EmailValidator.validate(emailText);
+//            ResetEmailStatus();
+//        } catch (Exception e) {
+//            SetEmailError(e.getMessage());
+//        }
+//
+//        try {
+//            PasswordValidator.validate(passwordText);
+//            ResetPasswordStatus();
+//        } catch (Exception e) {
+//            SetPasswordError(e.getMessage());
+//        }
 
         try {
             Authenticator.login(emailText,passwordText);
@@ -111,6 +111,10 @@ public class LoginController {
         Stage stage = new Stage();
         stage.setTitle("dashboard");
         stage.setScene(scene);
+
+        Stage loginStage = (Stage) loginButton.getScene().getWindow();
+        loginStage.close();
+
         stage.show();
 
     }
