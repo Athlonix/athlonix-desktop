@@ -22,6 +22,7 @@ import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.http.HttpResponse;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -32,7 +33,7 @@ public class ActivityController implements Initializable {
     private TableView<Activity> activitiesTable;
 
     @FXML
-    private TableColumn<Activity, Date> endColumn;
+    private TableColumn<Activity, String> endColumn;
 
     @FXML
     private TableColumn<Activity, String> nameColumn;
@@ -44,7 +45,7 @@ public class ActivityController implements Initializable {
     private TableColumn<Activity, String> sportColumn;
 
     @FXML
-    private TableColumn<Activity, Date> startColumn;
+    private TableColumn<Activity, String> startColumn;
 
     @FXML
     private TableColumn<Activity, String> actionColumn;
@@ -56,24 +57,49 @@ public class ActivityController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        List<Activity> activites;
+        List<Activity> activities;
 
         try {
-            activites = getAllActivities();
+            activities = getAllActivities();
         } catch (Exception e) {
             //TODO: handle error
             System.out.println("error here");
             return;
         }
 
+
+
         ObservableList<Activity> list = FXCollections.observableArrayList();
-        list.addAll(activites);
+        list.addAll(activities);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        startColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        endColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+
+        startColumn.setCellValueFactory(cellData -> {
+
+            Activity activity = cellData.getValue();
+            Date startDate = activity.getStartDate();
+
+
+            String formattedDate = dateFormat.format(startDate);
+
+            return new SimpleStringProperty(formattedDate);
+        });
+
+        endColumn.setCellValueFactory(cellData -> {
+
+            Activity activity = cellData.getValue();
+            Date endDate = activity.getEndDate();
+
+            String formattedDate = dateFormat.format(endDate);
+
+            return new SimpleStringProperty(formattedDate);
+        });
+
         recurrenceColumn.setCellValueFactory(new PropertyValueFactory<>("recurrence"));
+
         sportColumn.setCellValueFactory(cellData -> {
 
             Activity activity = cellData.getValue();
@@ -81,6 +107,7 @@ public class ActivityController implements Initializable {
 
             return new SimpleStringProperty(sport.getName());
         });
+
         actionColumn.setCellValueFactory(cellData -> {
             return new SimpleStringProperty("test");
         });
@@ -93,9 +120,9 @@ public class ActivityController implements Initializable {
     private List<Activity> getAllActivities() throws IOException, URISyntaxException, InterruptedException {
         String route = "/activities";
 
-        HttpResponse<String> activitesResponse = APIQuerier.getRequest(route);
+        HttpResponse<String> activitiesResponse = APIQuerier.getRequest(route);
 
-        String responseString = activitesResponse.body();
+        String responseString = activitiesResponse.body();
 
         Gson gson = new Gson();
 
@@ -103,10 +130,9 @@ public class ActivityController implements Initializable {
         JsonArray dataArray = response.getAsJsonObject().getAsJsonArray("data");
 
         Type activityListType = new TypeToken<List<Activity>>(){}.getType();
-        List<Activity> activities = gson.fromJson(dataArray, activityListType);
 
 
-        return activities;
+        return gson.fromJson(dataArray, activityListType);
     }
 
 }
