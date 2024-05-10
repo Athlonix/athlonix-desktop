@@ -13,34 +13,34 @@
 
 <Pane prefHeight="542.0" prefWidth="800.0" stylesheets="@../styles/primer-light.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="athlonix.controllers.ActivityController">
    <children>
-       <TableView fx:id="activitesTable" layoutX="33.0" layoutY="71.0" prefHeight="400.0" prefWidth="737.0" styleClass="striped">
+       <TableView fx:id="activitiesTable" layoutX="33.0" layoutY="71.0" prefHeight="400.0" prefWidth="737.0" styleClass="striped">
            <columns>
-               <TableColumn minWidth="81.0" prefWidth="106.0" text="Nom">
+               <TableColumn fx:id="nameColumn" minWidth="81.0" prefWidth="106.0" text="Nom">
                    <cellValueFactory>
                        <PropertyValueFactory property="queries" />
                    </cellValueFactory>
                </TableColumn>
-               <TableColumn minWidth="30.0" prefWidth="112.0" styleClass="align-right" text="Sport">
+               <TableColumn fx:id="sportColumn" minWidth="30.0" prefWidth="112.0" styleClass="align-right" text="Sport">
                    <cellValueFactory>
                        <PropertyValueFactory property="latency" />
                    </cellValueFactory>
                </TableColumn>
-               <TableColumn prefWidth="97.0" styleClass="align-right" text="Debut">
+               <TableColumn fx:id="startColumn" prefWidth="97.0" styleClass="align-right" text="Debut">
                    <cellValueFactory>
                        <PropertyValueFactory property="requests" />
                    </cellValueFactory>
                </TableColumn>
-            <TableColumn prefWidth="105.0" styleClass="align-right" text="Fin">
+            <TableColumn fx:id="endColumn" prefWidth="105.0" styleClass="align-right" text="Fin">
                <cellValueFactory>
                   <PropertyValueFactory property="requests" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="128.0" styleClass="align-right" text="Recurrence">
+            <TableColumn fx:id="recurrenceColumn" prefWidth="128.0" styleClass="align-right" text="Recurrence">
                <cellValueFactory>
                   <PropertyValueFactory property="requests" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="186.0" styleClass="align-right" text="Actions">
+            <TableColumn fx:id="actionColumn" prefWidth="186.0" styleClass="align-right" text="Actions">
                <cellValueFactory>
                   <PropertyValueFactory property="requests" />
                </cellValueFactory>
@@ -50,7 +50,7 @@
                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
            </columnResizePolicy>
            <items>
-               <FXCollections fx:factory="observableArrayList">
+               <FXCollections fx:id="activityRows" fx:factory="observableArrayList">
                </FXCollections>
            </items>
        </TableView>

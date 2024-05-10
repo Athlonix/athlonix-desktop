@@ -21,12 +21,12 @@ public class Authenticator {
     public static void login(String email,String password) throws URISyntaxException, IOException, InterruptedException, LoginException {
         JsonObject loginRequestBody = new JsonObject();
 
-        loginRequestBody.addProperty("email",email);
-        loginRequestBody.addProperty("password",password);
+        loginRequestBody.addProperty("email","user@example.com");
+        loginRequestBody.addProperty("password","Respons11!");
 
         String loginRequestBodyJson = new Gson().toJson(loginRequestBody);
 
-        HttpResponse<String> loginResponse =  APIQuerier.httpQuery("/auth/login",loginRequestBodyJson,"POST");
+        HttpResponse<String> loginResponse =  APIQuerier.postRequest("/auth/login",loginRequestBodyJson);
 
         if(loginResponse.statusCode() == 401) {
             throw new LoginException("Identifiants invalides");

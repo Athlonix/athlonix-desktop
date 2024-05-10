@@ -1,21 +1,50 @@
 package athlonix.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 import java.util.List;
 
 public class Activity {
 
+    @Expose
     private int id;
+    @Expose
+    @SerializedName("max_participants")
     private int maxParticipants;
+    @Expose
     private String name;
-    private int idSport;
+    @Expose
+    @SerializedName("sport")
+    private Sport sport;
+    @Expose
+    @SerializedName("id_Address")
+    private int idAddress;
+    @Expose
+    private List<String> days;
+    @Expose
+    @SerializedName("start_date")
+    private Date startDate;
+    @Expose
+    @SerializedName("end_date")
+    private Date endDate;
+    @Expose
+    private int interval;
+    @Expose
+    private String description;
+    @Expose
+    @SerializedName("min_participants")
+    private int minParticipants;
+    @Expose
+    private String recurrence;
 
-    public Activity(int id, int maxParticipants, String name, int idSport, int idAddress, List<String> days, Date startDate, Date endDate, int interval, String description, int minParticipants, String recurrence) {
+    public Activity(int id, int maxParticipants, String name,Sport sport, int idAddress, List<String> days, Date startDate, Date endDate, int interval, String description, int minParticipants, String recurrence) {
         this.id = id;
         this.maxParticipants = maxParticipants;
         this.name = name;
-        this.idSport = idSport;
         this.idAddress = idAddress;
+        this.sport = sport;
         this.days = days;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -25,14 +54,6 @@ public class Activity {
         this.recurrence = recurrence;
     }
 
-    private int idAddress;
-    private List<String> days;
-    private Date startDate;
-    private Date endDate;
-    private int interval;
-    private String description;
-    private int minParticipants;
-    private String recurrence;
 
 
     public int getId() {
@@ -59,12 +80,12 @@ public class Activity {
         this.name = name;
     }
 
-    public int getIdSport() {
-        return idSport;
+    public Sport getSport() {
+        return sport;
     }
 
-    public void setIdSport(int idSport) {
-        this.idSport = idSport;
+    public void setSport(Sport sport) {
+        this.sport = sport;
     }
 
     public int getIdAddress() {
@@ -130,6 +151,5 @@ public class Activity {
     public void setRecurrence(String recurrence) {
         this.recurrence = recurrence;
     }
-
 
 }

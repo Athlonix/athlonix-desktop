@@ -11,27 +11,12 @@ import java.time.Duration;
 public class APIQuerier {
 
     final static String API_URL = "http://localhost:3101";
-    private static URI queryUrl;
-    private static HttpRequest.BodyPublisher queryJsonBody;
-    private static String queryMethod;
 
-    public static HttpResponse<String> httpQuery(String route,String jsonBody, String method) throws URISyntaxException, IOException, InterruptedException {
-        queryUrl = new URI(API_URL + route);
-        queryMethod = method;
+    public static HttpResponse<String> postRequest(String route,String jsonBody) throws IOException, InterruptedException, URISyntaxException {
 
-        queryJsonBody = HttpRequest.BodyPublishers.ofString(jsonBody);
+        URI queryUrl = new URI(API_URL + route);
+        HttpRequest.BodyPublisher queryJsonBody = HttpRequest.BodyPublishers.ofString(jsonBody);
 
-        switch (queryMethod) {
-            case "GET":
-                return getRequest();
-            case "POST":
-                return postRequest();
-        }
-
-        return null;
-    }
-
-    private static HttpResponse<String> postRequest() throws IOException, InterruptedException {
         HttpRequest postRequest = HttpRequest.newBuilder()
                 .uri(queryUrl)
                 .header("Content-Type","application/json")
@@ -45,7 +30,10 @@ public class APIQuerier {
         return httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
     }
 
-    private static HttpResponse<String> getRequest() throws IOException, InterruptedException {
+    public static HttpResponse<String> getRequest(String route) throws IOException, InterruptedException, URISyntaxException {
+
+        URI queryUrl = new URI(API_URL + route);
+
         HttpRequest getRequest = HttpRequest.newBuilder()
                 .uri(queryUrl)
                 .header("Content-Type","application/json")
