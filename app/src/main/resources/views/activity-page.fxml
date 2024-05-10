@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="742.0" prefWidth="1200.0" stylesheets="@../styles/primer-light.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="athlonix.controllers.ActivityController">
+<Pane prefHeight="742.0" prefWidth="1200.0" stylesheets="@../styles/primer-light.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="athlonix.controllers.ActivitiesController">
    <children>
        <TableView fx:id="activitiesTable" layoutX="33.0" layoutY="71.0" prefHeight="633.0" prefWidth="1145.0" styleClass="striped">
            <columns>
