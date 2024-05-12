@@ -11,12 +11,16 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -27,6 +31,7 @@ import java.net.http.HttpResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ActivitiesController implements Initializable {
@@ -83,10 +88,7 @@ public class ActivitiesController implements Initializable {
 
             Activity activity = cellData.getValue();
             Date startDate = activity.getStartDate();
-
-
             String formattedDate = dateFormat.format(startDate);
-
             return new SimpleStringProperty(formattedDate);
         });
 
@@ -94,19 +96,15 @@ public class ActivitiesController implements Initializable {
 
             Activity activity = cellData.getValue();
             Date endDate = activity.getEndDate();
-
             String formattedDate = dateFormat.format(endDate);
-
             return new SimpleStringProperty(formattedDate);
         });
 
         recurrenceColumn.setCellValueFactory(new PropertyValueFactory<>("recurrence"));
 
         sportColumn.setCellValueFactory(cellData -> {
-
             Activity activity = cellData.getValue();
             Sport sport = activity.getSport();
-
             return new SimpleStringProperty(sport.getName());
         });
 
@@ -130,8 +128,13 @@ public class ActivitiesController implements Initializable {
                         button.getStyleClass().add("button-outlined");
 
                         button.setOnAction(event -> {
-                            Activity i = getTableView().getItems().get(getIndex());
-                            System.out.println("Action clicked for item: " + i.getName());
+                            Activity activity = getTableView().getItems().get(getIndex());
+
+                            try {
+                                showActivityPage(activity);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         });
 
                         setText(null);
@@ -168,6 +171,21 @@ public class ActivitiesController implements Initializable {
 
 
         return gson.fromJson(dataArray, activityListType);
+    }
+
+    private void showActivityPage(Activity activity) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/single-activity-view.fxml"));
+        Parent root = fxmlLoader.load();
+
+        ActivityController activityController = fxmlLoader.getController();
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle(activity.getName());
+        stage.setScene(scene);
+
+        stage.show();
     }
 
 }
