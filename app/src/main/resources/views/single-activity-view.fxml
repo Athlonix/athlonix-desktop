@@ -1,17 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="1096.0" prefWidth="1200.0" stylesheets="@../styles/primer-light.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="athlonix.controllers.ActivityController">
+<Pane prefHeight="824.0" prefWidth="1200.0" stylesheets="@../styles/primer-light.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="athlonix.controllers.ActivityController">
    <children>
-      <ScrollPane prefHeight="742.0" prefWidth="1200.0">
+      <ScrollPane prefHeight="824.0" prefWidth="1200.0">
          <content>
-            <AnchorPane prefHeight="803.0" prefWidth="1192.0">
+            <AnchorPane prefHeight="687.0" prefWidth="1192.0">
                <children>
-                  <Text layoutX="40.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-1" text="Nom Activité" />
+                  <Text fx:id="activity_name" layoutX="39.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-1" text="Nom Activité" />
+                  <Text fx:id="created_at" layoutX="236.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message" text="Crée le 12-03-4" />
+                  <Text fx:id="number_participants" layoutX="39.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="De X à X participants" />
+                  <TabPane layoutX="39.0" layoutY="138.0" prefHeight="297.0" prefWidth="1105.0" style="-fx-border-width: 2px; -fx-border-style: solid;" styleClass="border" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Description">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <VBox prefHeight="231.0" prefWidth="1101.0">
+                                       <children>
+                                          <Text fx:id="description" strokeType="OUTSIDE" strokeWidth="0.0" text="ashdf kljashdkljf akjsdhfkljash dkflj haskljdf halkjhfeuh aioushef iouas h eofiu ahsefphas peocihasopeicfhn opaisefncpoaisjefncpoiasjefcp oiasejfncpoiasjefnpcoaisjefnpcoiasjenpfcoiajsefcasef" wrappingWidth="1072.2822265625" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                                       </VBox.margin>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </Tab>
+                      <Tab text="Addresse">
+                           <content>
+                              <VBox prefHeight="279.0" prefWidth="1105.0" styleClass="title-4">
+                                 <children>
+                                    <Text fx:id="road" strokeType="OUTSIDE" strokeWidth="0.0" text="Rue : ">
+                                       <VBox.margin>
+                                          <Insets bottom="8.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="number_road" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero :">
+                                       <VBox.margin>
+                                          <Insets bottom="8.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="city" layoutX="10.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ville :">
+                                       <VBox.margin>
+                                          <Insets bottom="8.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="postcode" layoutX="10.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code Postal :">
+                                       <VBox.margin>
+                                          <Insets bottom="8.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="country" layoutX="10.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pays :">
+                                       <VBox.margin>
+                                          <Insets bottom="8.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="complement" layoutX="10.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Complement :">
+                                       <VBox.margin>
+                                          <Insets bottom="8.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="adress_name" layoutX="10.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
+                                       <VBox.margin>
+                                          <Insets bottom="8.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+                  <TabPane layoutX="39.0" layoutY="457.0" prefHeight="623.0" prefWidth="1108.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Tâches">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </Tab>
+                      <Tab text="Ressources">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </Tab>
+                        <Tab text="Gerer l'équipe">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+                  <HBox layoutX="204.0" layoutY="82.0" prefHeight="38.0" prefWidth="78.0" style="-fx-background-radius: 14;" styleClass="bg-accent-emphasis">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: -color-fg-emphasis;" text="Thritahlon" textAlignment="CENTER" wrappingWidth="104.2822265625" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </padding>
+                  </HBox>
                </children>
             </AnchorPane>
          </content>
