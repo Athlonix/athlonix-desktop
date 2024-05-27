@@ -11,6 +11,9 @@ permissions:
   contents: read
   pull-requests: read
 
+env:
+  MAVEN_COLOR: true
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
