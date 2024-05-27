@@ -22,7 +22,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>de.je</groupId>
+      <groupId>de.jensd</groupId>
       <artifactId>fontawesomefx</artifactId>
       <version>8.9</version>
     </dependency>
