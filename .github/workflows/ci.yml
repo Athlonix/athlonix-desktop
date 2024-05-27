@@ -9,11 +9,13 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     container: maven:3.9-eclipse-temurin-22-alpine
+    timeout-minutes: 2
 
     steps:
       - uses: actions/checkout@v4
