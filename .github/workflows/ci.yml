@@ -11,9 +11,6 @@ permissions:
   contents: read
   pull-requests: read
 
-env:
-  MAVEN_COLOR: true
-
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -24,4 +21,4 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run tests with Maven
-        run: mvn -B test --file app/pom.xml
+        run: mvn -B test --file app/pom.xml -Dstyle.color=always
