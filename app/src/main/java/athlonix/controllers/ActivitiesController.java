@@ -15,10 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -29,12 +26,18 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.http.HttpResponse;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ActivitiesController implements Initializable {
+
+    @FXML
+    private Pagination pagination;
+    @FXML
+    private TextField searchInput;
 
     @FXML
     private TableView<Activity> activitiesTable;
@@ -43,10 +46,13 @@ public class ActivitiesController implements Initializable {
     private TableColumn<Activity, String> endColumn;
 
     @FXML
+    private TableColumn<Activity, String> timeColumn;
+
+    @FXML
     private TableColumn<Activity, String> nameColumn;
 
     @FXML
-    private TableColumn<Activity, String> recurrenceColumn;
+    private TableColumn<Activity, String> frequencyColumn;
 
     @FXML
     private TableColumn<Activity, String> sportColumn;
@@ -63,18 +69,19 @@ public class ActivitiesController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        fillDataWithActivities("");
+    }
 
+    private void fillDataWithActivities(String searchParam) {
         List<Activity> activities;
 
         try {
-            activities = getAllActivities();
+            activities = getAllActivities(searchParam);
         } catch (Exception e) {
             //TODO: handle error
             System.out.println("error here");
             return;
         }
-
-
 
         ObservableList<Activity> list = FXCollections.observableArrayList();
         list.addAll(activities);
@@ -96,11 +103,36 @@ public class ActivitiesController implements Initializable {
 
             Activity activity = cellData.getValue();
             Date endDate = activity.getEndDate();
+            if(endDate == null) {
+                return new SimpleStringProperty("Aucune");
+            }
             String formattedDate = dateFormat.format(endDate);
             return new SimpleStringProperty(formattedDate);
         });
 
-        recurrenceColumn.setCellValueFactory(new PropertyValueFactory<>("recurrence"));
+        timeColumn.setCellValueFactory(cellData -> {
+            Activity activity = cellData.getValue();
+            String startTime = activity.getStartTime();
+            String endTime = activity.getEndTime();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+            //String formatedStart = startTime.format(formatter);
+            //String formatedEnd = endTime.format(formatter);
+            return new SimpleStringProperty(startTime + " - " + endTime);
+        });
+
+        frequencyColumn.setCellValueFactory(cellData -> {
+            Activity activity = cellData.getValue();
+            String frequency = activity.getFrequency();
+
+            if(frequency == null) {
+                return new SimpleStringProperty("unique");
+            }
+
+            return new SimpleStringProperty(frequency);
+        });
+
 
         sportColumn.setCellValueFactory(cellData -> {
             Activity activity = cellData.getValue();
@@ -113,7 +145,8 @@ public class ActivitiesController implements Initializable {
         });
 
         Callback<TableColumn<Activity, String>, TableCell<Activity, String>> cellFoctory = (TableColumn<Activity, String> param) -> {
-            final TableCell<Activity, String> cell = new TableCell<Activity, String>() {
+
+            return new TableCell<Activity, String>() {
                 @Override
                 public void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
@@ -144,8 +177,6 @@ public class ActivitiesController implements Initializable {
                 }
 
             };
-
-            return cell;
         };
 
         actionColumn.setCellFactory(cellFoctory);
@@ -155,8 +186,12 @@ public class ActivitiesController implements Initializable {
 
     }
 
-    private List<Activity> getAllActivities() throws IOException, URISyntaxException, InterruptedException {
+    private List<Activity> getAllActivities(String searchParam) throws IOException, URISyntaxException, InterruptedException {
         String route = "/activities";
+
+        if(!searchParam.equals("")) {
+            route += "?search=" + searchParam;
+        }
 
         HttpResponse<String> activitiesResponse = APIQuerier.getRequest(route);
 
@@ -186,6 +221,11 @@ public class ActivitiesController implements Initializable {
         stage.setScene(scene);
 
         stage.show();
+    }
+
+    public void searchActivities() throws IOException {
+        String searchParam = searchInput.getText();
+        fillDataWithActivities(searchParam);
     }
 
 }
