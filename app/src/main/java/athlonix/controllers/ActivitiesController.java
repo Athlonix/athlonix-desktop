@@ -85,7 +85,7 @@ public class ActivitiesController implements Initializable {
         ObservableList<Activity> list = FXCollections.observableArrayList();
         list.addAll(activities);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -213,6 +213,8 @@ public class ActivitiesController implements Initializable {
         Parent root = fxmlLoader.load();
 
         ActivityController activityController = fxmlLoader.getController();
+        activityController.setActivity(activity);
+        activityController.fillActivityData();
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();

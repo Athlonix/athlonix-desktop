@@ -17,7 +17,7 @@
             <AnchorPane prefHeight="687.0" prefWidth="1192.0">
                <children>
                   <Text fx:id="activity_name" layoutX="39.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-1" text="Nom Activité" />
-                  <Text fx:id="created_at" layoutX="236.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message" text="Crée le 12-03-4" />
+                  <Text fx:id="created_at" layoutX="985.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="message" text="Crée le 12-03-4" />
                   <Text fx:id="number_participants" layoutX="39.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="De X à X participants" />
                   <TabPane layoutX="39.0" layoutY="138.0" prefHeight="297.0" prefWidth="1105.0" style="-fx-border-width: 2px; -fx-border-style: solid;" styleClass="border" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
@@ -27,7 +27,7 @@
                                  <children>
                                     <VBox prefHeight="231.0" prefWidth="1101.0">
                                        <children>
-                                          <Text fx:id="description" strokeType="OUTSIDE" strokeWidth="0.0" text="ashdf kljashdkljf akjsdhfkljash dkflj haskljdf halkjhfeuh aioushef iouas h eofiu ahsefphas peocihasopeicfhn opaisefncpoaisjefncpoiasjefcp oiasejfncpoiasjefnpcoaisjefnpcoiasjenpfcoiajsefcasef" wrappingWidth="1072.2822265625" />
+                                          <Text fx:id="activity_description" strokeType="OUTSIDE" strokeWidth="0.0" text="x" wrappingWidth="1072.2822265625" />
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
@@ -41,32 +41,32 @@
                            <content>
                               <VBox prefHeight="279.0" prefWidth="1105.0" styleClass="title-4">
                                  <children>
-                                    <Text fx:id="road" strokeType="OUTSIDE" strokeWidth="0.0" text="Rue : ">
+                                    <Text fx:id="adress_street" strokeType="OUTSIDE" strokeWidth="0.0" text="Rue : ">
                                        <VBox.margin>
                                           <Insets bottom="8.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <Text fx:id="number_road" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero :">
+                                    <Text fx:id="adress_number" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero :">
                                        <VBox.margin>
                                           <Insets bottom="8.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <Text fx:id="city" layoutX="10.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ville :">
+                                    <Text fx:id="adress_city" layoutX="10.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ville :">
                                        <VBox.margin>
                                           <Insets bottom="8.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <Text fx:id="postcode" layoutX="10.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code Postal :">
+                                    <Text fx:id="adress_postcode" layoutX="10.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code Postal :">
                                        <VBox.margin>
                                           <Insets bottom="8.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <Text fx:id="country" layoutX="10.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pays :">
+                                    <Text fx:id="adress_country" layoutX="10.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pays :">
                                        <VBox.margin>
                                           <Insets bottom="8.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <Text fx:id="complement" layoutX="10.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Complement :">
+                                    <Text fx:id="adress_complement" layoutX="10.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Complement :">
                                        <VBox.margin>
                                           <Insets bottom="8.0" />
                                        </VBox.margin>
@@ -106,7 +106,7 @@
                   </TabPane>
                   <HBox layoutX="204.0" layoutY="82.0" prefHeight="38.0" prefWidth="78.0" style="-fx-background-radius: 14;" styleClass="bg-accent-emphasis">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: -color-fg-emphasis;" text="Thritahlon" textAlignment="CENTER" wrappingWidth="104.2822265625" />
+                        <Text fx:id="activity_sport" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: -color-fg-emphasis;" text="Thritahlon" textAlignment="CENTER" wrappingWidth="104.2822265625" />
                      </children>
                      <opaqueInsets>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
