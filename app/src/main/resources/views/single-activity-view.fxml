@@ -61,11 +61,6 @@
                                           <Insets bottom="8.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <Text fx:id="adress_country" layoutX="10.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pays :">
-                                       <VBox.margin>
-                                          <Insets bottom="8.0" />
-                                       </VBox.margin>
-                                    </Text>
                                     <Text fx:id="adress_complement" layoutX="10.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Complement :">
                                        <VBox.margin>
                                           <Insets bottom="8.0" />

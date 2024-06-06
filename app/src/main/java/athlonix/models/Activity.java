@@ -23,7 +23,7 @@ public class Activity {
     @SerializedName("sport")
     private Sport sport;
     @Expose
-    @SerializedName("id_Address")
+    @SerializedName("id_address")
     private int idAddress;
     @Expose
     @SerializedName("days_of_week")

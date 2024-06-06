@@ -1,20 +1,33 @@
 package athlonix.controllers;
+import athlonix.auth.APIQuerier;
 import athlonix.models.Activity;
+import athlonix.models.Adress;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.http.HttpResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ActivityController {
 
-
     private Activity activity;
-
+    @FXML
+    private VBox adressTab;
     @FXML
     private Text activity_description;
 
@@ -29,9 +42,6 @@ public class ActivityController {
 
     @FXML
     private Text adress_complement;
-
-    @FXML
-    private Text adress_country;
 
     @FXML
     private Text adress_name;
@@ -64,6 +74,44 @@ public class ActivityController {
         created_at.setText("Commence le " + dateFormat.format(activity.getStartDate()));
         activity_sport.setText(activity.getSport().getName());
         number_participants.setText("De " + activity.getMinParticipants() + " à " + activity.getMaxParticipants());
+
+        try {
+            if(activity.getIdAddress() == 0) {
+              throw new RuntimeException();
+            }
+            Adress adress = getActivityAdress(activity.getIdAddress());
+            fillAdressInformations(adress);
+
+        } catch (Exception e) {
+            adressTab.getChildren().clear();
+            adressTab.getChildren().add(new Text("Aucune adresse trouvée associée à cette activité"));
+        }
+    }
+
+    private Adress getActivityAdress(int idAdress) throws IOException, URISyntaxException, InterruptedException {
+        String route = "/addresses/" + idAdress;
+
+        HttpResponse<String> adressResponse = APIQuerier.getRequest(route);
+
+        String responseString = adressResponse.body();
+
+        Gson gson = new Gson();
+
+        JsonElement response = gson.fromJson(responseString, JsonElement.class);
+        JsonObject jsonAdress = response.getAsJsonObject();
+
+        Type adressType = new TypeToken<Adress>(){}.getType();
+
+        return gson.fromJson(jsonAdress, adressType);
+    }
+
+    private void fillAdressInformations(Adress address) {
+        adress_street.setText("Rue : " + address.getRoad());
+        adress_number.setText("Numero : " + Integer.toString(address.getNumber()));
+        adress_postcode.setText("Ville : " + address.getPostal_code());
+        adress_city.setText("Ville : " + address.getCity());
+        adress_complement.setText("Complement : " + address.getComplement());
+        adress_name.setText("Nom : " + address.getName());
     }
 
 }
