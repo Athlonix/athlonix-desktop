@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="824.0" prefWidth="1200.0" stylesheets="@../styles/primer-light.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="athlonix.controllers.ActivityController">
+<Pane prefHeight="1244.0" prefWidth="1200.0" stylesheets="@../styles/primer-light.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="athlonix.controllers.ActivityController">
    <children>
       <ScrollPane prefHeight="824.0" prefWidth="1200.0">
          <content>
@@ -80,11 +83,11 @@
                         </Tab>
                     </tabs>
                   </TabPane>
-                  <TabPane layoutX="39.0" layoutY="457.0" prefHeight="623.0" prefWidth="1108.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane layoutX="39.0" layoutY="457.0" prefHeight="623.0" prefWidth="1108.0" style="-fx-border-width: 2px; -fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab text="Tâches">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="579.0" prefWidth="1096.0" />
                         </content>
                       </Tab>
                       <Tab text="Ressources">
@@ -94,7 +97,18 @@
                       </Tab>
                         <Tab text="Gerer l'équipe">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="teamTable" layoutY="50.0" prefHeight="533.0" prefWidth="1109.0">
+                                      <columns>
+                                        <TableColumn fx:id="member_name" prefWidth="230.0" text="Nom" />
+                                        <TableColumn fx:id="member_firstName" prefWidth="288.0" text="Prenom" />
+                                          <TableColumn fx:id="member_username" prefWidth="307.0" text="Nom d'utilisateur" />
+                                          <TableColumn fx:id="member_actions" prefWidth="282.0" text="Actions" />
+                                      </columns>
+                                    </TableView>
+                                    <Button layoutX="940.0" layoutY="8.0" mnemonicParsing="false" text="Ajouter un membre" />
+                                 </children></AnchorPane>
                            </content>
                         </Tab>
                     </tabs>

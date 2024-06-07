@@ -36,22 +36,24 @@ public class LoginController {
     }
 
     private void validateLoginFormat() {
-        String emailText = email.getText();
-        String passwordText = password.getText();
+//        String emailText = email.getText();
+//        String passwordText = password.getText();
+        String emailText = "admin@example.com";
+        String passwordText = "admin123!";
 
-//        try {
-//            EmailValidator.validate(emailText);
-//            ResetEmailStatus();
-//        } catch (Exception e) {
-//            SetEmailError(e.getMessage());
-//        }
-//
-//        try {
-//            PasswordValidator.validate(passwordText);
-//            ResetPasswordStatus();
-//        } catch (Exception e) {
-//            SetPasswordError(e.getMessage());
-//        }
+        try {
+            EmailValidator.validate(emailText);
+            ResetEmailStatus();
+        } catch (Exception e) {
+            SetEmailError(e.getMessage());
+        }
+
+        try {
+            PasswordValidator.validate(passwordText);
+            ResetPasswordStatus();
+        } catch (Exception e) {
+            SetPasswordError(e.getMessage());
+        }
 
         try {
             Authenticator.login(emailText,passwordText);

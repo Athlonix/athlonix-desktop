@@ -1,7 +1,9 @@
 package athlonix.controllers;
 import athlonix.auth.APIQuerier;
+import athlonix.lib.TeamRepository;
 import athlonix.models.Activity;
 import athlonix.models.Adress;
+import athlonix.models.TeamMember;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -9,6 +11,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -60,6 +64,17 @@ public class ActivityController {
 
     @FXML
     private Text number_participants;
+    @FXML
+    private TableView<TeamMember> teamTable;
+    @FXML
+    private TableColumn<TeamMember, String> member_firstName;
+    @FXML
+    private TableColumn<TeamMember, String> member_name;
+    @FXML
+    private TableColumn<TeamMember, String> member_username;
+    @FXML
+    private TableColumn<TeamMember, String> member_actions;
+
 
     public void setActivity(Activity activity) {
         this.activity = activity;
@@ -68,7 +83,6 @@ public class ActivityController {
     public void fillActivityData() {
         activity_description.setText(activity.getDescription());
         activity_name.setText(activity.getName());
-
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         created_at.setText("Commence le " + dateFormat.format(activity.getStartDate()));
@@ -86,6 +100,8 @@ public class ActivityController {
             adressTab.getChildren().clear();
             adressTab.getChildren().add(new Text("Aucune adresse trouvée associée à cette activité"));
         }
+
+        fillTeamData();
     }
 
     private Adress getActivityAdress(int idAdress) throws IOException, URISyntaxException, InterruptedException {
@@ -112,6 +128,17 @@ public class ActivityController {
         adress_city.setText("Ville : " + address.getCity());
         adress_complement.setText("Complement : " + address.getComplement());
         adress_name.setText("Nom : " + address.getName());
+    }
+
+    private void fillTeamData() {
+        TeamRepository teamRepository = new TeamRepository();
+        try{
+        int status = teamRepository.removeTeamMember(activity.getId(),99);
+        int a = 4;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 }

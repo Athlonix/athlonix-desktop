@@ -30,6 +30,24 @@ public class APIQuerier {
         return httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
     }
 
+    public static HttpResponse<String> postRequest(String route) throws IOException, InterruptedException, URISyntaxException {
+
+        URI queryUrl = new URI(API_URL + route);
+
+        HttpRequest postRequest = HttpRequest.newBuilder()
+                .uri(queryUrl)
+                .header("Content-Type","application/json")
+                .header("Authorization","Bearer "+Authenticator.AUTH_TOKEN)
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .timeout(Duration.ofSeconds(10))
+                .build();
+
+        HttpClient httpClient = HttpClient.newBuilder().build();
+
+        return httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
+    }
+
+
     public static HttpResponse<String> getRequest(String route) throws IOException, InterruptedException, URISyntaxException {
 
         URI queryUrl = new URI(API_URL + route);
@@ -45,6 +63,23 @@ public class APIQuerier {
         HttpClient httpClient = HttpClient.newBuilder().build();
 
         return httpClient.send(getRequest, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public static HttpResponse<String> deleteRequest(String route) throws IOException, InterruptedException, URISyntaxException {
+
+        URI queryUrl = new URI(API_URL + route);
+
+        HttpRequest postRequest = HttpRequest.newBuilder()
+                .uri(queryUrl)
+                .header("Content-Type","application/json")
+                .header("Authorization","Bearer "+Authenticator.AUTH_TOKEN)
+                .DELETE()
+                .timeout(Duration.ofSeconds(10))
+                .build();
+
+        HttpClient httpClient = HttpClient.newBuilder().build();
+
+        return httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
     }
 
 

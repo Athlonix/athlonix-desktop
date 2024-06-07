@@ -21,8 +21,8 @@ public class Authenticator {
     public static void login(String email,String password) throws URISyntaxException, IOException, InterruptedException, LoginException {
         JsonObject loginRequestBody = new JsonObject();
 
-        loginRequestBody.addProperty("email","user@example.com");
-        loginRequestBody.addProperty("password","Respons11!");
+        loginRequestBody.addProperty("email",email);
+        loginRequestBody.addProperty("password",password);
 
         String loginRequestBodyJson = new Gson().toJson(loginRequestBody);
 
