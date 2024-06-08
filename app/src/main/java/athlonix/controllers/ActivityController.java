@@ -9,13 +9,19 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -75,6 +81,7 @@ public class ActivityController {
     @FXML
     private TableColumn<TeamMember, String> member_actions;
 
+    TeamRepository teamRepository = new TeamRepository();
 
     public void setActivity(Activity activity) {
         this.activity = activity;
@@ -131,14 +138,69 @@ public class ActivityController {
     }
 
     private void fillTeamData() {
-        TeamRepository teamRepository = new TeamRepository();
         try{
-        int status = teamRepository.removeTeamMember(activity.getId(),99);
-        int a = 4;
+        List<TeamMember> teamMembers = teamRepository.getTeamMembers(activity.getId());
+
+        ObservableList<TeamMember> list = FXCollections.observableArrayList();
+        list.addAll(teamMembers);
+
+        member_firstName.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+        member_name.setCellValueFactory(new PropertyValueFactory<>("last_name"));
+        member_username.setCellValueFactory(new PropertyValueFactory<>("username"));
+        member_actions.setCellValueFactory(cellData -> {
+            return new SimpleStringProperty("dummy");
+        });
+
+        member_actions.setCellFactory(memberActionFoctory);
+
+        teamTable.setItems(list);
+
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
     }
+
+    Callback<TableColumn<TeamMember, String>, TableCell<TeamMember, String>> memberActionFoctory = (TableColumn<TeamMember, String> param) -> {
+
+        return new TableCell<TeamMember, String>() {
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+
+                } else {
+
+                    Button deleteButton = new Button("Retirer");
+                    deleteButton.getStyleClass().add("danger");
+
+                    deleteButton.setOnAction(event -> {
+                        TeamMember member = getTableView().getItems().get(getIndex());
+
+                        try {
+                            int status = teamRepository.removeTeamMember(activity.getId(), member.getId());
+
+                            if(status != 200) {
+                                throw new RuntimeException("wrong status code : " + status);
+                            }
+
+                            fillTeamData();
+                        } catch (Exception e) {
+                            System.out.println("failed to remove team member");
+                        }
+
+                    });
+
+                    setText(null);
+                    setGraphic(deleteButton);
+
+                }
+            }
+
+        };
+    };
 
 }
