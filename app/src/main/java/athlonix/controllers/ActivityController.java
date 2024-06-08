@@ -12,8 +12,12 @@ import com.google.gson.reflect.TypeToken;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -21,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -32,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class ActivityController {
 
@@ -81,7 +87,12 @@ public class ActivityController {
     @FXML
     private TableColumn<TeamMember, String> member_actions;
 
+    @FXML
+    private Button addMemberButton;
+
     TeamRepository teamRepository = new TeamRepository();
+
+    List<TeamMember> teamMembers;
 
     public void setActivity(Activity activity) {
         this.activity = activity;
@@ -137,9 +148,9 @@ public class ActivityController {
         adress_name.setText("Nom : " + address.getName());
     }
 
-    private void fillTeamData() {
+    public void fillTeamData() {
         try{
-        List<TeamMember> teamMembers = teamRepository.getTeamMembers(activity.getId());
+        this.teamMembers = teamRepository.getTeamMembers(activity.getId());
 
         ObservableList<TeamMember> list = FXCollections.observableArrayList();
         list.addAll(teamMembers);
@@ -160,6 +171,33 @@ public class ActivityController {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    @FXML
+    void addMember(ActionEvent event) {
+        try {
+            showAddEmployeePage();
+        } catch (IOException e) {
+            System.out.println("error while opening employees add page");
+        }
+    }
+
+    private void showAddEmployeePage() throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/add-member-view.fxml"));
+        Parent root = fxmlLoader.load();
+
+        AddMemberController addMemberController = fxmlLoader.getController();
+        addMemberController.setIdActivity(activity.getId());
+        addMemberController.setMembersId(teamMembers.stream().map(TeamMember::getId).collect(Collectors.toList()));
+        addMemberController.setActivityController(this);
+        addMemberController.fillActivityData();
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle("Add team member to activity");
+        stage.setScene(scene);
+        stage.show();
     }
 
     Callback<TableColumn<TeamMember, String>, TableCell<TeamMember, String>> memberActionFoctory = (TableColumn<TeamMember, String> param) -> {

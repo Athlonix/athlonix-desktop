@@ -107,7 +107,7 @@
                                           <TableColumn fx:id="member_actions" prefWidth="282.0" text="Actions" />
                                       </columns>
                                     </TableView>
-                                    <Button layoutX="940.0" layoutY="8.0" mnemonicParsing="false" text="Ajouter un membre" />
+                                    <Button fx:id="addMemberButton" layoutX="935.0" layoutY="8.0" mnemonicParsing="false" onAction="#addMember" styleClass="success" text="+ Ajouter un membre" />
                                  </children></AnchorPane>
                            </content>
                         </Tab>
