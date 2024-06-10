@@ -4,9 +4,9 @@ import athlonix.lib.TaskRepository;
 import athlonix.lib.TeamRepository;
 import athlonix.models.Activity;
 import athlonix.models.Adress;
+import athlonix.models.Task;
 import athlonix.models.TeamMember;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -16,14 +16,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -32,14 +29,13 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.net.http.HttpResponse;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-
 public class ActivityController {
 
     private Activity activity;
@@ -91,7 +87,40 @@ public class ActivityController {
     @FXML
     private Button addMemberButton;
 
+    @FXML
+    private DatePicker taskEndDate;
+
+    @FXML
+    private Button taskRefreshButton;
+
+    @FXML
+    private DatePicker taskStartDate;
+
+    @FXML
+    private TableView<Task> task_table;
+
+    @FXML
+    private TableColumn<Task, String> task_title;
+    @FXML
+    private TableColumn<Task, String> task_action;
+
+    @FXML
+    private TableColumn<Task, String> task_date;
+
+    @FXML
+    private TableColumn<Task, String> task_employee;
+
+    @FXML
+    private TableColumn<Task, String> task_priority;
+
+    @FXML
+    private TableColumn<Task, String> task_status;
+
+    @FXML
+    private Button addTaskButton;
+
     TeamRepository teamRepository = new TeamRepository();
+    TaskRepository taskRepository = new TaskRepository();
 
     List<TeamMember> teamMembers;
 
@@ -122,13 +151,66 @@ public class ActivityController {
 
         fillTeamData();
 
-        TaskRepository repository = new TaskRepository();
-        try {
-        repository.getAllActivityTasks(activity.getId(),"2024-05-05","2027-01-01");
+        LocalDate start_date  = LocalDate.now();
+        LocalDate end_date = start_date.plusDays(7);
 
+        taskStartDate.setValue(start_date);
+        taskEndDate.setValue(end_date);
+
+        refreshTask(null);
+    }
+    @FXML
+    void refreshTask(ActionEvent event) {
+        LocalDate startDate = taskStartDate.getValue();
+        LocalDate endDate = taskEndDate.getValue();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        fillTasksData(startDate.format(formatter),endDate.format(formatter));
+    }
+
+    @FXML
+    void addTask(ActionEvent event) {
+
+    }
+
+    private void fillTasksData(String startDate, String endDate) {
+
+        TaskRepository repository = new TaskRepository();
+        List<Task> tasks;
+
+        try {
+            tasks = repository.getAllActivityTasks(activity.getId(),startDate,endDate);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException("Unable to fetch tasks");
         }
+
+        ObservableList<Task> taskList = FXCollections.observableArrayList();
+        taskList.addAll(tasks);
+
+        task_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        task_priority.setCellValueFactory(new PropertyValueFactory<>("priority"));
+        task_status.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        task_date.setCellValueFactory(cellData -> {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+            Task task = cellData.getValue();
+            Date date = task.getOccurence().getDate();
+            String formattedDate = dateFormat.format(date);
+            return new SimpleStringProperty(formattedDate);
+        });
+
+
+        task_employee.setCellValueFactory(cellData -> {
+            Task task = cellData.getValue();
+            return new SimpleStringProperty(task.getEmployee().getUsername());
+        });
+
+        task_action.setCellValueFactory(cellData -> {
+            return new SimpleStringProperty("dummy");
+        });
+        task_action.setCellFactory(taskActionFoctory);
+
+        task_table.setItems(taskList);
     }
 
     private Adress getActivityAdress(int idAdress) throws IOException, URISyntaxException, InterruptedException {
@@ -209,6 +291,7 @@ public class ActivityController {
         stage.show();
     }
 
+
     Callback<TableColumn<TeamMember, String>, TableCell<TeamMember, String>> memberActionFoctory = (TableColumn<TeamMember, String> param) -> {
 
         return new TableCell<TeamMember, String>() {
@@ -230,7 +313,7 @@ public class ActivityController {
                         try {
                             int status = teamRepository.removeTeamMember(activity.getId(), member.getId());
 
-                            if(status != 200) {
+                            if (status != 200) {
                                 throw new RuntimeException("wrong status code : " + status);
                             }
 
@@ -246,7 +329,52 @@ public class ActivityController {
 
                 }
             }
+        };
+    };
 
+        Callback<TableColumn<Task, String>, TableCell<Task, String>> taskActionFoctory = (TableColumn<Task, String> taskParam) -> {
+
+            return new TableCell<Task, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+
+                        Button modifyButton = new Button("Modifier");
+                        modifyButton.getStyleClass().add("accent");
+
+                        Button deleteButton = new Button("Supprimer");
+                        deleteButton.getStyleClass().add("danger");
+
+                        deleteButton.setOnAction(event -> {
+                            Task task = getTableView().getItems().get(getIndex());
+                            try {
+                                int status = taskRepository.deleteTask(task.getId());
+
+                                if(status != 200) {
+                                    throw new RuntimeException("task could not be deleted");
+                                }
+                            } catch (Exception e) {
+                                System.out.println("error fetching");
+                            }
+                         });
+
+                        modifyButton.setOnAction(event -> {
+                            Task task = getTableView().getItems().get(getIndex());
+
+                        });
+
+                        HBox hbox = new HBox(10);
+                        hbox.getChildren().addAll(deleteButton, modifyButton);
+
+                        setText(null);
+                        setGraphic(hbox);
+
+                    }
+                }
         };
     };
 

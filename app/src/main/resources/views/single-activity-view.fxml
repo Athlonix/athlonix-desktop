@@ -15,9 +15,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="1244.0" prefWidth="1200.0" stylesheets="@../styles/primer-light.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="athlonix.controllers.ActivityController">
+<Pane prefHeight="766.0" prefWidth="1200.0" stylesheets="@../styles/primer-light.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="athlonix.controllers.ActivityController">
    <children>
-      <ScrollPane prefHeight="824.0" prefWidth="1200.0">
+      <ScrollPane prefHeight="760.0" prefWidth="1200.0">
          <content>
             <AnchorPane prefHeight="687.0" prefWidth="1192.0">
                <children>
@@ -91,22 +91,25 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="579.0" prefWidth="1096.0">
                                  <children>
-                                    <DatePicker layoutX="21.0" layoutY="28.0" />
-                                    <Text layoutX="258.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Au">
+                                    <DatePicker fx:id="taskStartDate" layoutX="21.0" layoutY="28.0" />
+                                    <Text layoutX="255.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Au">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Text>
-                                    <DatePicker layoutX="293.0" layoutY="28.0" />
-                                    <TableView layoutX="21.0" layoutY="89.0" prefHeight="486.0" prefWidth="1056.0">
+                                    <DatePicker fx:id="taskEndDate" layoutX="293.0" layoutY="28.0" />
+                                    <TableView fx:id="task_table" layoutX="21.0" layoutY="89.0" prefHeight="486.0" prefWidth="1056.0">
                                       <columns>
-                                        <TableColumn prefWidth="476.53343772888184" text="titre" />
-                                          <TableColumn prefWidth="98.66659545898438" text="priorité" />
-                                          <TableColumn prefWidth="157.60003662109375" text="employé" />
-                                          <TableColumn prefWidth="162.40008544921875" text="date" />
-                                          <TableColumn prefWidth="161.33319091796875" text="status" />
+                                        <TableColumn fx:id="task_title" prefWidth="332.80009269714355" text="titre" />
+                                          <TableColumn fx:id="task_priority" prefWidth="82.13330078125" text="priorité" />
+                                          <TableColumn fx:id="task_employee" prefWidth="167.46664428710938" text="employé" />
+                                          <TableColumn fx:id="task_date" prefWidth="114.400146484375" text="date" />
+                                          <TableColumn fx:id="task_status" prefWidth="140.533203125" text="status" />
+                                          <TableColumn fx:id="task_action" prefWidth="215.4666748046875" text="Action" />
                                       </columns>
                                     </TableView>
+                                    <Button fx:id="add_task_button" layoutX="905.0" layoutY="29.0" mnemonicParsing="false" onAction="#addTask" prefHeight="36.0" prefWidth="172.0" text="Ajouter une tâche" />
+                                    <Button fx:id="taskRefreshButton" layoutX="545.0" layoutY="29.0" mnemonicParsing="false" onAction="#refreshTask" text="Actualiser" />
                                  </children></AnchorPane>
                         </content>
                       </Tab>

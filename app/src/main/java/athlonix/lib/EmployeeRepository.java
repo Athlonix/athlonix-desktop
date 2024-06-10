@@ -33,8 +33,6 @@ public class EmployeeRepository {
 
         Type adressType = new TypeToken<List<TeamMember>>(){}.getType();
 
-        List<TeamMember> a = gson.fromJson(employees, adressType);
-
         return gson.fromJson(employees, adressType);
     }
 }
