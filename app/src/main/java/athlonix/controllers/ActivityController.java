@@ -1,5 +1,6 @@
 package athlonix.controllers;
 import athlonix.auth.APIQuerier;
+import athlonix.lib.TaskRepository;
 import athlonix.lib.TeamRepository;
 import athlonix.models.Activity;
 import athlonix.models.Adress;
@@ -120,6 +121,14 @@ public class ActivityController {
         }
 
         fillTeamData();
+
+        TaskRepository repository = new TaskRepository();
+        try {
+        repository.getAllActivityTasks(activity.getId(),"2024-05-05","2027-01-01");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private Adress getActivityAdress(int idAdress) throws IOException, URISyntaxException, InterruptedException {
