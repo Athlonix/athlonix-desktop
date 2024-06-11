@@ -2,11 +2,13 @@ package athlonix.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class Task {
     @SerializedName("id")
     private int id;
     @SerializedName("created_at")
-    private String createdAt;
+    private Date createdAt;
     @SerializedName("priority")
     private String priority;
     @SerializedName("id_activity_exception")
@@ -30,11 +32,11 @@ public class Task {
         this.id = id;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 

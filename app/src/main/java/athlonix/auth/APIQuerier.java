@@ -82,5 +82,23 @@ public class APIQuerier {
         return httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
     }
 
+    public static HttpResponse<String> patchRequest(String route,String jsonBody) throws IOException, InterruptedException, URISyntaxException {
+
+        URI queryUrl = new URI(API_URL + route);
+        HttpRequest.BodyPublisher queryJsonBody = HttpRequest.BodyPublishers.ofString(jsonBody);
+
+        HttpRequest postRequest = HttpRequest.newBuilder()
+                .uri(queryUrl)
+                .header("Content-Type","application/json")
+                .header("Authorization","Bearer "+Authenticator.AUTH_TOKEN)
+                .method("PATCH",queryJsonBody)
+                .timeout(Duration.ofSeconds(10))
+                .build();
+
+        HttpClient httpClient = HttpClient.newBuilder().build();
+
+        return httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
+    }
+
 
 }

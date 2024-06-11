@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -291,6 +292,23 @@ public class ActivityController {
         stage.show();
     }
 
+    private void showEditTaskPage(Task task) throws IOException, URISyntaxException, InterruptedException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/task-view.fxml"));
+        Parent root = fxmlLoader.load();
+
+        TaskController taskController = fxmlLoader.getController();
+        taskController.fillData(task, activity.getId());
+        taskController.setActivityController(this);
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle(task.getTitle());
+        stage.setScene(scene);
+
+        stage.show();
+    }
+
 
     Callback<TableColumn<TeamMember, String>, TableCell<TeamMember, String>> memberActionFoctory = (TableColumn<TeamMember, String> param) -> {
 
@@ -357,6 +375,8 @@ public class ActivityController {
                                 if(status != 200) {
                                     throw new RuntimeException("task could not be deleted");
                                 }
+
+                                refreshTask(null);
                             } catch (Exception e) {
                                 System.out.println("error fetching");
                             }
@@ -364,7 +384,11 @@ public class ActivityController {
 
                         modifyButton.setOnAction(event -> {
                             Task task = getTableView().getItems().get(getIndex());
-
+                            try {
+                                showEditTaskPage(task);
+                            } catch (IOException | URISyntaxException | InterruptedException e) {
+                                System.out.println("failed to open edit task");
+                            }
                         });
 
                         HBox hbox = new HBox(10);
