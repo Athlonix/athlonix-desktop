@@ -34,21 +34,9 @@
    <left>
       <Pane prefHeight="542.0" prefWidth="200.0" style="-fx-border-color: -color-border-default; -fx-border-image-width: 1;" BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutY="146.0" prefHeight="250.0" prefWidth="200.0" styleClass="-color-accent-3">
+            <VBox fx:id="dashboardMenu" layoutY="146.0" prefHeight="250.0" prefWidth="200.0" styleClass="-color-accent-3">
                <children>
-                  <Button fx:id="employeeButton" mnemonicParsing="false" onAction="#showEmployeePage" prefHeight="47.0" prefWidth="200.0" style="-fx-background-color: -color-accent-2;" text="Employee">
-                     <VBox.margin>
-                        <Insets bottom="16.0" />
-                     </VBox.margin></Button>
                   <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showActivityPage" prefHeight="47.0" prefWidth="200.0" style="-fx-background-color: -color-accent-2;" text="Activites">
-                     <VBox.margin>
-                        <Insets bottom="16.0" />
-                     </VBox.margin></Button>
-                  <Button layoutX="10.0" layoutY="57.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="200.0" style="-fx-background-color: -color-accent-2;" text="Cours">
-                     <VBox.margin>
-                        <Insets bottom="16.0" />
-                     </VBox.margin></Button>
-                  <Button layoutX="10.0" layoutY="104.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="200.0" style="-fx-background-color: -color-accent-2;" text="Tournois">
                      <VBox.margin>
                         <Insets bottom="16.0" />
                      </VBox.margin></Button>

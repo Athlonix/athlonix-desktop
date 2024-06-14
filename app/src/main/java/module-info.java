@@ -7,9 +7,10 @@ module athlonix.athlonixdesktop {
     requires java.net.http;
 
     opens athlonix.models to com.google.gson, javafx.base;
-    opens athlonix to com.google.gson, javafx.fxml;
+    opens athlonix to com.google.gson, javafx.fxml, com.calendarfx.view;
     requires com.google.gson;
     requires java.xml;
+    requires com.calendarfx.view;
 
     exports athlonix;
     exports athlonix.controllers;
