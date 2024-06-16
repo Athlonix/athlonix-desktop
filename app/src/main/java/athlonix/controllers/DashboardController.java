@@ -35,6 +35,7 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        dashboardMenu.setSpacing(16);
         for(Plugin plugin : PluginManager.plugins) {
             Button pluginButton = new Button(plugin.getName());
             pluginButton.setStyle("-fx-background-color:  -color-accent-2");

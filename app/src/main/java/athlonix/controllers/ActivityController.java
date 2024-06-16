@@ -1,7 +1,7 @@
 package athlonix.controllers;
 import athlonix.auth.APIQuerier;
-import athlonix.lib.TaskRepository;
-import athlonix.lib.TeamRepository;
+import athlonix.repository.TaskRepository;
+import athlonix.repository.TeamRepository;
 import athlonix.models.Activity;
 import athlonix.models.Adress;
 import athlonix.models.Task;
@@ -24,7 +24,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 import java.io.IOException;

@@ -1,12 +1,10 @@
 package athlonix.controllers;
 import athlonix.auth.APIQuerier;
-import athlonix.lib.TeamRepository;
+import athlonix.repository.TeamRepository;
 import athlonix.models.Task;
 import athlonix.models.TeamMember;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +15,6 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
 import java.text.SimpleDateFormat;

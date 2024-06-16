@@ -1,4 +1,4 @@
-package athlonix.lib;
+package athlonix.repository;
 
 import athlonix.auth.APIQuerier;
 import athlonix.models.TeamMember;

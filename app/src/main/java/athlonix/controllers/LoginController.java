@@ -2,23 +2,34 @@ package athlonix.controllers;
 
 import athlonix.auth.Authenticator;
 import athlonix.auth.LoginException;
+import athlonix.auth.NetworkChecker;
 import athlonix.validators.EmailValidator;
 import athlonix.validators.PasswordValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController implements Initializable {
+
+    @FXML
+    private BorderPane rootPane;
+
     public PasswordField password;
     public Text forgotPassword;
     public Text emailError;
@@ -121,5 +132,28 @@ public class LoginController {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(NetworkChecker.isOnline) {
+           return;
+        }
 
+        HBox band = new HBox();
+        band.setStyle("-fx-background-color: #f0f0f0;");
+        band.setPrefHeight(40);
+        band.setSpacing(0);
+        band.setAlignment(Pos.CENTER);
+        Label label = new Label("Il semble que vous soyez hors ligne. ");
+        Hyperlink link = new Hyperlink("Passer en mode hors ligne");
+        band.getChildren().addAll(label, link);
+        rootPane.setTop(band);
+
+        link.setOnAction(event -> {
+            try {
+                openDashboard();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
 }

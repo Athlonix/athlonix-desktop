@@ -1,8 +1,7 @@
-package athlonix.lib;
+package athlonix.repository;
 
 import athlonix.auth.APIQuerier;
 import athlonix.models.Task;
-import athlonix.models.TeamMember;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

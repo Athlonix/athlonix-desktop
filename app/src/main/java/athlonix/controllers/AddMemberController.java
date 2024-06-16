@@ -1,23 +1,19 @@
 package athlonix.controllers;
 
-import athlonix.lib.EmployeeRepository;
-import athlonix.lib.TeamRepository;
-import athlonix.models.Activity;
+import athlonix.repository.EmployeeRepository;
+import athlonix.repository.TeamRepository;
 import athlonix.models.TeamMember;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class AddMemberController {
 
