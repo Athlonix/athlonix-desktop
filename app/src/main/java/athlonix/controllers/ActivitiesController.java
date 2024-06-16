@@ -1,12 +1,10 @@
 package athlonix.controllers;
 
-import athlonix.auth.APIQuerier;
+import athlonix.auth.NetworkChecker;
 import athlonix.models.Activity;
 import athlonix.models.Sport;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.reflect.TypeToken;
+import athlonix.repository.ActivitiesRepository;
+import athlonix.repository.OfflineActivitiesRepository;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,15 +15,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.http.HttpResponse;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -65,6 +60,9 @@ public class ActivitiesController implements Initializable {
     @FXML
     private Button searchButton;
 
+    private final ActivitiesRepository activitiesRepository = new ActivitiesRepository();
+    private final OfflineActivitiesRepository offlineActivitiesRepository = new OfflineActivitiesRepository();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -75,7 +73,11 @@ public class ActivitiesController implements Initializable {
         List<Activity> activities;
 
         try {
-            activities = getAllActivities(searchParam);
+            if(NetworkChecker.isOnline) {
+                activities = activitiesRepository.getAllActivities(searchParam);
+            } else {
+                activities = offlineActivitiesRepository.getAllActivities();
+            }
         } catch (Exception e) {
             //TODO: handle error
             System.out.println("error here");
@@ -155,6 +157,11 @@ public class ActivitiesController implements Initializable {
 
                     } else {
 
+                        if(!NetworkChecker.isOnline) {
+                            setGraphic(new Text("NON DISPONIBLE"));
+                            return;
+                        }
+
                         Button button = new Button("Plus");
                         button.getStyleClass().add("accent");
                         button.getStyleClass().add("button-outlined");
@@ -183,28 +190,6 @@ public class ActivitiesController implements Initializable {
         activitiesTable.setItems(list);
 
 
-    }
-
-    private List<Activity> getAllActivities(String searchParam) throws IOException, URISyntaxException, InterruptedException {
-        String route = "/activities";
-
-        if(!searchParam.equals("")) {
-            route += "?search=" + searchParam;
-        }
-
-        HttpResponse<String> activitiesResponse = APIQuerier.getRequest(route);
-
-        String responseString = activitiesResponse.body();
-
-        Gson gson = new Gson();
-
-        JsonElement response = gson.fromJson(responseString, JsonElement.class);
-        JsonArray dataArray = response.getAsJsonObject().getAsJsonArray("data");
-
-        Type activityListType = new TypeToken<List<Activity>>(){}.getType();
-
-
-        return gson.fromJson(dataArray, activityListType);
     }
 
     private void showActivityPage(Activity activity) throws IOException {
