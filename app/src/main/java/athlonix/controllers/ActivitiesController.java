@@ -201,7 +201,7 @@ public class ActivitiesController implements Initializable {
         activityController.setActivity(activity);
         activityController.fillActivityData();
 
-        Scene scene = new Scene(root);
+        Scene scene = SceneLoader.GetScene(root);
         Stage stage = new Stage();
         stage.setTitle(activity.getName());
         stage.setScene(scene);

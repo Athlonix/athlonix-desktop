@@ -284,10 +284,10 @@ public class ActivityController {
         addMemberController.setActivityController(this);
         addMemberController.fillActivityData();
 
-        Scene scene = new Scene(root);
+        Scene addMemberScene = SceneLoader.GetScene(root);
         Stage stage = new Stage();
         stage.setTitle("Add team member to activity");
-        stage.setScene(scene);
+        stage.setScene(addMemberScene);
         stage.show();
     }
 
@@ -300,10 +300,10 @@ public class ActivityController {
         taskController.fillData(task, activity.getId());
         taskController.setActivityController(this);
 
-        Scene scene = new Scene(root);
+        Scene editTaskScene = SceneLoader.GetScene(root);
         Stage stage = new Stage();
         stage.setTitle(task.getTitle());
-        stage.setScene(scene);
+        stage.setScene(editTaskScene);
 
         stage.show();
     }

@@ -113,14 +113,14 @@ public class LoginController implements Initializable {
         globalError.setStyle("-fx-fill: none");
     }
 
-    private void openDashboard() throws IOException, IOException {
+    private void openDashboard() throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/dashboard-view.fxml"));
         Parent root = fxmlLoader.load();
 
         DashboardController dashboardController = fxmlLoader.getController();
 
-        Scene scene = new Scene(root);
+        Scene scene = SceneLoader.GetScene(root);
         Stage stage = new Stage();
         stage.setTitle("dashboard");
         stage.setScene(scene);
@@ -139,7 +139,6 @@ public class LoginController implements Initializable {
         }
 
         HBox band = new HBox();
-        band.setStyle("-fx-background-color: #f0f0f0;");
         band.setPrefHeight(40);
         band.setSpacing(0);
         band.setAlignment(Pos.CENTER);
