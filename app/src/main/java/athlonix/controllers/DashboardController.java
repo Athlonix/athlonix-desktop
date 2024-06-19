@@ -51,8 +51,6 @@ public class DashboardController implements Initializable {
 
             });
 
-
-
             dashboardMenu.getChildren().add(pluginButton);
         }
     }

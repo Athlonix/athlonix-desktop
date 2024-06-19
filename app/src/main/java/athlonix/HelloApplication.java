@@ -12,13 +12,17 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
+
         NetworkChecker.init();
         AppSettings.loadConfiguration();
-
+//
         Scene loginScene = SceneLoader.GetScene("login-view");
         stage.setTitle("Hello!");
         stage.setScene(loginScene);
         stage.show();
+
+        FileDownloader fileDownloader = new FileDownloader();
+        fileDownloader.DownloadFile("test");
 
     }
 
