@@ -37,7 +37,7 @@ public class FileDownloader {
                 try {
                     URL url = null;
                     try {
-                        url = new URL("https://cses.fi/book/book.pdf");
+                        url = new URL("http://localhost:8086/theme/dracula");
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }

@@ -4,10 +4,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane prefHeight="123.0" prefWidth="323.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="athlonix.controllers.DownloadViewControlerr">
    <children>
-      <ProgressBar fx:id="progressBar" layoutX="29.0" layoutY="66.0" prefHeight="16.0" prefWidth="266.0" progress="0.27" />
+      <ProgressBar fx:id="progressBar" layoutX="29.0" layoutY="66.0" prefHeight="16.0" prefWidth="266.0" progress="0.0" />
       <Text fx:id="downloadText" layoutX="29.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telechargement de" />
    </children>
 </Pane>
