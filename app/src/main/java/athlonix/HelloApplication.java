@@ -21,7 +21,7 @@ public class HelloApplication extends Application {
         stage.show();
 
         FileDownloader fileDownloader = new FileDownloader();
-        fileDownloader.DownloadFile("test");
+        fileDownloader.DownloadFile("test","theme");
 
     }
 

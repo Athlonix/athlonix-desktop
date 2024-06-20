@@ -18,7 +18,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class FileDownloader {
-    public void DownloadFile(String url) throws IOException {
+    public void DownloadFile(String url,String folderPath) throws IOException {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/download-view.fxml"));
@@ -59,7 +59,7 @@ public class FileDownloader {
 
                     java.io.BufferedInputStream in = new java.io.BufferedInputStream(httpConnection.getInputStream());
                     java.io.FileOutputStream fos = new java.io.FileOutputStream(
-                            "package.zip");
+                            "app/" + folderPath + "/" + fileName);
                     java.io.BufferedOutputStream bout = new BufferedOutputStream(
                             fos, 1024);
                     byte[] data = new byte[1024];
@@ -79,7 +79,7 @@ public class FileDownloader {
                     bout.close();
                     in.close();
                 } catch (IOException e) {
-                    System.out.println("bads");
+                    System.out.println("error while downloading file");
                 }
 
             }
