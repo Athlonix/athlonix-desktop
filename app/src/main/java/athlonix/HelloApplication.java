@@ -20,8 +20,8 @@ public class HelloApplication extends Application {
         stage.setScene(loginScene);
         stage.show();
 
-        FileDownloader fileDownloader = new FileDownloader();
-        fileDownloader.DownloadFile("test","theme");
+//        FileDownloader fileDownloader = new FileDownloader();
+//        fileDownloader.DownloadFile("test","theme");
 
     }
 
