@@ -11,6 +11,7 @@ module athlonix.athlonixdesktop {
     requires com.google.gson;
     requires java.xml;
     requires com.calendarfx.view;
+    requires java.desktop;
 
     exports athlonix;
     exports athlonix.controllers;

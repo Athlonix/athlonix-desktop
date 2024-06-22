@@ -46,11 +46,18 @@ public class DashboardController implements Initializable {
     @FXML
     void showTemesSettings(ActionEvent event) {
         try {
-            Scene themesScene = SceneLoader.GetScene("themes-view");
-            Stage themeStage = new Stage();
-            themeStage.setTitle("Themes settings");
-            themeStage.setScene(themesScene);
-            themeStage.show();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/themes-view.fxml"));
+            Parent root = fxmlLoader.load();
+            ThemesViewController downloadViewControlerr = fxmlLoader.getController();
+            downloadViewControlerr.dashboardController=this;
+
+            Scene scene = SceneLoader.GetScene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Themes settings");
+            stage.setScene(scene);
+            stage.show();
+
         } catch (IOException e) {
             System.out.println("failed to load themes page");
         }
@@ -88,5 +95,26 @@ public class DashboardController implements Initializable {
 
             dashboardMenu.getChildren().add(pluginButton);
         }
+    }
+
+    public void reload() throws IOException {
+        Stage stage = (Stage) dashboardMenu.getScene().getWindow();
+        stage.close();
+        openDashboard();
+    }
+
+    private void openDashboard() throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/dashboard-view.fxml"));
+        Parent root = fxmlLoader.load();
+
+        DashboardController dashboardController = fxmlLoader.getController();
+
+        Scene scene = SceneLoader.GetScene(root);
+        Stage stage = new Stage();
+        stage.setTitle("dashboard");
+        stage.setScene(scene);
+        stage.show();
+
     }
 }

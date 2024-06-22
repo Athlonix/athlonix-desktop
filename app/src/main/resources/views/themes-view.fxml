@@ -12,6 +12,6 @@
             <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
          </padding>
       </TilePane>
-      <Button fx:id="saveButton" layoutX="26.0" layoutY="715.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="152.0" styleClass="accent" text="Sauvegarder" />
+      <Button fx:id="saveButton" layoutX="26.0" layoutY="715.0" mnemonicParsing="false" onAction="#saveThemeClicked" prefHeight="34.0" prefWidth="152.0" styleClass="accent" text="Sauvegarder" />
    </children>
 </Pane>

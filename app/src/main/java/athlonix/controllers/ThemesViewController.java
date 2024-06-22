@@ -3,6 +3,7 @@ package athlonix.controllers;
 import athlonix.AppSettings;
 import athlonix.models.Theme;
 import athlonix.repository.ThemeRepository;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -11,8 +12,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
@@ -30,12 +34,17 @@ public class ThemesViewController implements Initializable {
 
     ThemeRepository themeRepository = new ThemeRepository();
 
+    DashboardController dashboardController;
+
     List<Theme> allThemes;
+
+    private String selectedTheme;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            selectedTheme = AppSettings.getTheme();
             allThemes = themeRepository.getAllThemes();
             createThemesBoxes(allThemes);
         } catch (Exception e) {
@@ -58,11 +67,30 @@ public class ThemesViewController implements Initializable {
         }
     }
 
+    @FXML
+    void saveThemeClicked(ActionEvent event) {
+        try {
+            AppSettings.setTheme(selectedTheme);
+            Stage currentStage = (Stage) saveButton.getScene().getWindow();
+            currentStage.close();
+            dashboardController.reload();
+        } catch (Exception e) {
+            System.out.println("failed to reload");
+        }
+    }
+
     private Pane createInstalledBox(Theme theme) {
+
         Pane pane = new Pane();
         pane.setPrefHeight(207.0);
         pane.setPrefWidth(278.0);
-        pane.setStyle("-fx-border-color: black; -fx-border-radius: 8;");
+        String border = "-fx-border-color: black;";
+
+        if(theme.getName().equals(selectedTheme)) {
+            border = "-fx-border-color: -color-accent-5;";
+        }
+
+        pane.setStyle(border + "-fx-border-radius: 0 0 8 8;-fx-border-width: 2;");
         pane.toFront();
 
         String themeName;
@@ -74,14 +102,32 @@ public class ThemesViewController implements Initializable {
         radioButton.setStyle("-fx-font-weight: 800;");
         radioButton.getStyleClass().add("bold");
 
+        radioButton.setOnAction(event -> {
+            boolean selected = radioButton.isSelected();
+            if(!selected) {
+                radioButton.setSelected(true);
+                return;
+            }
+
+            selectedTheme = theme.getName();
+            refreshThemes();
+        });
+
+        if(theme.getName().equals(selectedTheme)) {
+            radioButton.setSelected(true);
+        }
+
         StackPane stackPane = new StackPane();
-        stackPane.setLayoutX(1.0);
-        stackPane.setLayoutY(1.0);
-        stackPane.setPrefHeight(170.0);
-        stackPane.setPrefWidth(276.0);
+        stackPane.setLayoutX(2.0);  // Adjusted layout to fit within the pane's border
+        stackPane.setLayoutY(2.0);
+        stackPane.setPrefHeight(168.0);
+        stackPane.setPrefWidth(274.0);
         String imageUrl = "http://localhost:8086/theme/image/"+theme.getName();
-        stackPane.setStyle("-fx-background-image: url('"+imageUrl+"'); -fx-background-size: cover; -fx-background-radius: 8 8 0 0;");
+        stackPane.setStyle("-fx-background-image: url('"+imageUrl+"'); -fx-background-size: cover; -fx-background-radius: 8 8 8 8;");
         stackPane.toBack();
+        Rectangle rec =  new javafx.scene.shape.Rectangle(pane.getPrefWidth(), pane.getPrefHeight());
+        stackPane.setClip(rec);
+
 
         pane.getChildren().addAll(radioButton, stackPane);
         return pane;
@@ -93,14 +139,15 @@ public class ThemesViewController implements Initializable {
         pane.setLayoutY(257.0);
         pane.setPrefHeight(207.0);
         pane.setPrefWidth(278.0);
-        pane.setStyle("-fx-border-color: black; -fx-border-radius: 8;");
+        String border = "-fx-border-color: black;";
+        pane.setStyle(border + "-fx-border-radius: 0 0 8 8;-fx-border-width: 2;");
         pane.toFront();
 
         StackPane stackPane = new StackPane();
-        stackPane.setLayoutX(1.0);
-        stackPane.setLayoutY(1.0);
-        stackPane.setPrefHeight(170.0);
-        stackPane.setPrefWidth(276.0);
+        stackPane.setLayoutX(2.0);  // Adjusted layout to fit within the pane's border
+        stackPane.setLayoutY(2.0);
+        stackPane.setPrefHeight(168.0);
+        stackPane.setPrefWidth(274.0);
         stackPane.toBack();
 
         String imageUrl = "http://localhost:8086/theme/image/"+theme.getName();
