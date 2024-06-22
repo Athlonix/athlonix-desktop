@@ -3,6 +3,7 @@ package athlonix.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class DownloadViewControlerr {
 
@@ -20,5 +21,10 @@ public class DownloadViewControlerr {
 
     public void setTextValue(String fileName) {
         downloadText.setText("Telechargement de " + fileName);
+    }
+
+    public void close() {
+        Stage stage = (Stage) downloadText.getScene().getWindow();
+        stage.close();
     }
 }

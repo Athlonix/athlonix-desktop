@@ -8,16 +8,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.RadioButton;
-import javafx.scene.image.Image;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
@@ -34,12 +30,14 @@ public class ThemesViewController implements Initializable {
 
     ThemeRepository themeRepository = new ThemeRepository();
 
+    List<Theme> allThemes;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            List<Theme> themes = themeRepository.getAllThemes();
-            createThemesBoxes(themes);
+            allThemes = themeRepository.getAllThemes();
+            createThemesBoxes(allThemes);
         } catch (Exception e) {
             System.out.println("failed to fetch themes");
         }
@@ -82,7 +80,7 @@ public class ThemesViewController implements Initializable {
         stackPane.setPrefHeight(170.0);
         stackPane.setPrefWidth(276.0);
         String imageUrl = "http://localhost:8086/theme/image/"+theme.getName();
-        stackPane.setStyle("-fx-background-image: url('"+imageUrl+"'); -fx-background-size: cover; -fx-background-radius: 8 8 0 0; z");
+        stackPane.setStyle("-fx-background-image: url('"+imageUrl+"'); -fx-background-size: cover; -fx-background-radius: 8 8 0 0;");
         stackPane.toBack();
 
         pane.getChildren().addAll(radioButton, stackPane);
@@ -122,13 +120,22 @@ public class ThemesViewController implements Initializable {
 
         hyperlink.setOnAction(event -> {
             try {
-                themeRepository.downloadTheme(theme.getName());
+                Thread downloadThread = themeRepository.downloadTheme(theme.getName());
+                downloadThread.join();
+                refreshThemes();
             } catch (IOException e) {
                 System.out.println("failed to install theme");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         });
 
         pane.getChildren().addAll(stackPane, text, hyperlink);
         return pane;
+    }
+
+    private void refreshThemes() {
+        themesContainer.getChildren().clear();
+        createThemesBoxes(allThemes);
     }
 }

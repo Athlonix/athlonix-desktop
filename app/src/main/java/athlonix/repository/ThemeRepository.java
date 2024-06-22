@@ -35,9 +35,10 @@ public class ThemeRepository {
         return gson.fromJson(jsonData, themeType);
     }
 
-    public void downloadTheme(String themeName) throws IOException {
+    public Thread downloadTheme(String themeName) throws IOException {
         FileDownloader fileDownloader = new FileDownloader();
         String themeRoute = SERVER_URL+"/theme/"+themeName;
-        fileDownloader.downloadFile(themeRoute,"themes");
+        return fileDownloader.downloadFile(themeRoute,"themes");
     }
+
 }

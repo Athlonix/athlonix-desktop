@@ -1,6 +1,7 @@
 package athlonix;
 
 import athlonix.controllers.DownloadViewControlerr;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,7 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class FileDownloader {
-    public void downloadFile(String route, String folderName) throws IOException {
+    public Thread downloadFile(String route, String folderName) throws IOException {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/download-view.fxml"));
@@ -70,15 +71,21 @@ public class FileDownloader {
                         downloadViewControlerr.setProgressBarValue(currentProgress);
 
                         bout.write(data, 0, x);
+
                     }
                     bout.close();
                     in.close();
+                    fos.close();
+                    Platform.runLater(downloadViewControlerr::close);
+
                 } catch (IOException e) {
                     System.out.println("error while downloading file");
                 }
 
             }
         };
-        new Thread(updatethread).start();
+        Thread thread = new Thread(updatethread);
+        thread.start();
+        return thread;
     }
 }
