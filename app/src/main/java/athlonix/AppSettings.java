@@ -3,10 +3,11 @@ package athlonix;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
 
 public class AppSettings {
     public static final String SETTINGS_FILE_PATH = "./settings.txt";
+    public static final String themesDirectory = "app/themes";
     static private String theme;
 
     public static String getTheme() {
@@ -35,8 +36,27 @@ public class AppSettings {
 
         try (FileWriter fileWriter = new FileWriter(saveFile)) {
             fileWriter.write("theme:"+newTheme+";\n");
+            theme = newTheme;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static HashSet<String> getInstalledThemes() {
+        File themesPath = new File(themesDirectory);
+        if(!themesPath.isDirectory()) {
+            throw new RuntimeException("Themes directory does not exist");
+        }
+
+        HashSet<String> existingThemes = new HashSet<String>();
+        for(String file : Objects.requireNonNull(themesPath.list())) {
+            int dotIndex = file.lastIndexOf('.');
+            if(dotIndex != -1) {
+                String fileName = file.substring(0, dotIndex);
+                existingThemes.add(fileName);
+            }
+        }
+
+        return existingThemes;
     }
 }

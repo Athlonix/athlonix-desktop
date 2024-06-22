@@ -1,7 +1,6 @@
 package athlonix;
 
 import athlonix.auth.NetworkChecker;
-import athlonix.controllers.SceneLoader;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -19,10 +18,6 @@ public class HelloApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(loginScene);
         stage.show();
-
-//        FileDownloader fileDownloader = new FileDownloader();
-//        fileDownloader.DownloadFile("test","theme");
-
     }
 
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package athlonix.controllers;
 
+import athlonix.SceneLoader;
 import athlonix.auth.NetworkChecker;
 import athlonix.models.Activity;
 import athlonix.models.Sport;

@@ -1,24 +1,19 @@
 package athlonix;
 
-import athlonix.controllers.ActivityController;
-import athlonix.controllers.DashboardController;
 import athlonix.controllers.DownloadViewControlerr;
-import athlonix.controllers.SceneLoader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 
 import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class FileDownloader {
-    public void DownloadFile(String url,String folderPath) throws IOException {
+    public void downloadFile(String route, String folderName) throws IOException {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/download-view.fxml"));
@@ -37,7 +32,7 @@ public class FileDownloader {
                 try {
                     URL url = null;
                     try {
-                        url = new URL("http://localhost:8086/theme/dracula");
+                        url = new URL(route);
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }
@@ -59,7 +54,7 @@ public class FileDownloader {
 
                     java.io.BufferedInputStream in = new java.io.BufferedInputStream(httpConnection.getInputStream());
                     java.io.FileOutputStream fos = new java.io.FileOutputStream(
-                            "app/" + folderPath + "/" + fileName);
+                            "app/" + folderName + "/" + fileName);
                     java.io.BufferedOutputStream bout = new BufferedOutputStream(
                             fos, 1024);
                     byte[] data = new byte[1024];

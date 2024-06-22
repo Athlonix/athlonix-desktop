@@ -15,4 +15,6 @@ module athlonix.athlonixdesktop {
     exports athlonix;
     exports athlonix.controllers;
     opens athlonix.controllers to javafx.fxml;
+    exports athlonix.repository;
+    opens athlonix.repository to javafx.fxml;
 }

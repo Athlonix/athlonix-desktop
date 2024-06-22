@@ -17,11 +17,11 @@
       <Pane prefHeight="58.0" prefWidth="1200.0" style="-fx-background-color: -color-accent-4;" styleClass="default-color1" BorderPane.alignment="CENTER">
          <children>
             <Text layoutX="36.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Athlonix" />
-            <MenuButton layoutX="1242.0" layoutY="13.0" mnemonicParsing="false" text="Mon compte">
+            <MenuButton fx:id="button_settings" layoutX="1242.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleSettingsClick" text="Paramètres">
               <items>
-                <MenuItem mnemonicParsing="false" text="Parametres" />
-                <MenuItem mnemonicParsing="false" text="Plugins" />
-                  <MenuItem mnemonicParsing="false" style="-fx-fill: -color-danger-6;" styleClass="danger" text="Deconnexion" />
+                <MenuItem mnemonicParsing="false" onAction="#showTemesSettings" text="Themes" />
+                <MenuItem mnemonicParsing="false" onAction="#showPluginsSettings" text="Plugins" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleLogout" style="-fx-fill: -color-danger-6;" styleClass="danger" text="Deconnexion" />
               </items>
             </MenuButton>
          </children>
