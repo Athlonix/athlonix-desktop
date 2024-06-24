@@ -25,4 +25,9 @@ public class AthlonixPlugin implements Plugin {
     public String getName() {
         return NAME;
     }
+
+     @Override
+    public String getScene() {
+
+    }
 }
