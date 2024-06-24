@@ -49,8 +49,8 @@ public class DashboardController implements Initializable {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/themes-view.fxml"));
             Parent root = fxmlLoader.load();
-            ThemesViewController downloadViewControlerr = fxmlLoader.getController();
-            downloadViewControlerr.dashboardController=this;
+            ThemesViewController themeViewController = fxmlLoader.getController();
+            themeViewController.dashboardController=this;
 
             Scene scene = SceneLoader.GetScene(root);
             Stage stage = new Stage();
@@ -68,7 +68,8 @@ public class DashboardController implements Initializable {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/plugins-view.fxml"));
             Parent root = fxmlLoader.load();
-            PluginViewController downloadViewControlerr = fxmlLoader.getController();
+            PluginViewController pluginViewController = fxmlLoader.getController();
+            pluginViewController.dashboardController=this;
 
             Scene scene = SceneLoader.GetScene(root);
             Stage stage = new Stage();

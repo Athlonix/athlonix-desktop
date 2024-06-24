@@ -42,7 +42,7 @@ public class PluginRepository {
         return fileDownloader.downloadFile(pluginRoute,"plugins");
     }
 
-    public void deletePlugin(String name) {
+    public void deletePlugin(String name) throws IOException {
         PluginManager.deletePlugin(name);
     }
 }

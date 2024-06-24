@@ -21,6 +21,7 @@ public class PluginViewController implements Initializable {
     @FXML
     private VBox pluginContainer;
 
+    public DashboardController dashboardController;
     private final PluginRepository pluginRepository = new PluginRepository();
     private List<Plugin> plugins;
 
@@ -77,8 +78,9 @@ public class PluginViewController implements Initializable {
             try {
                 Thread downloadThread = pluginRepository.downloadPlugin(plugin.getName());
                 downloadThread.join();
+                PluginManager.laodOnePlugin(plugin.getName());
+                dashboardController.reload();
                 refreshPlugins();
-
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -105,19 +107,25 @@ public class PluginViewController implements Initializable {
         description.setLayoutY(64.0);
         description.setWrappingWidth(445.90234375);
 
-        Button installButton = new Button("Désinstaller");
-        installButton.setLayoutX(708.0);
-        installButton.setLayoutY(43.0);
-        installButton.setPrefHeight(36.0);
-        installButton.setPrefWidth(135.0);
-        installButton.getStyleClass().add("danger");
+        Button uninstallButton = new Button("Désinstaller");
+        uninstallButton.setLayoutX(708.0);
+        uninstallButton.setLayoutY(43.0);
+        uninstallButton.setPrefHeight(36.0);
+        uninstallButton.setPrefWidth(135.0);
+        uninstallButton.getStyleClass().add("danger");
 
-        installButton.setOnAction(event -> {
-            pluginRepository.deletePlugin(plugin.getName());
-            refreshPlugins();
+        uninstallButton.setOnAction(event -> {
+
+            try {
+                pluginRepository.deletePlugin(plugin.getName());
+                dashboardController.reload();
+                refreshPlugins();
+            } catch (IOException e) {
+                System.out.println("failed to reload dashboard");
+            }
         });
 
-        pane.getChildren().addAll(title, description, installButton);
+        pane.getChildren().addAll(title, description, uninstallButton);
         return pane;
     }
 

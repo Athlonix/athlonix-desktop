@@ -11,7 +11,7 @@ import java.time.LocalTime;
 
 public class AthlonixPlugin implements Plugin {
 
-    private final String NAME = "Calendar Plugin";
+    private final String NAME = "Calendrier";
     @Override
     public void load() {
 

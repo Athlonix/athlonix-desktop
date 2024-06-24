@@ -1,6 +1,7 @@
 package athlonix;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -18,26 +19,47 @@ public class PluginManager {
             File pluginsDir = new File("app/plugins");
 
             File[] plugins = pluginsDir.listFiles();
-
-
-            for (File plugin_jar : plugins) {
-                try {
-                    URL url = plugin_jar.toURI().toURL();
-                    URL[] urls = new URL[] { url };
-
-                    ClassLoader cl = new URLClassLoader(urls);
-                    Class<Plugin> cls = (Class<Plugin>) cl.loadClass("plugins.AthlonixPlugin");
-                    Plugin plugin = cls.getDeclaredConstructor().newInstance();
-                    plugin.load();
-                    PluginManager.plugins.add(plugin);
-                } catch (Exception e) {
-                    System.out.println("Error while adding plugin " + plugin_jar.getName());
-                }
+            if(plugins == null) {
+                return;
+            }
+            for (File pluginJar : plugins) {
+                addPlugin(pluginJar);
             }
         } catch (Exception e) {
             System.out.println("Adding Plugins Failed Due To : " + e.toString());
         }
 
+    }
+
+    private static void addPlugin(File pluginJar) {
+        try {
+            URL url = pluginJar.toURI().toURL();
+            URL[] urls = new URL[] { url };
+
+            ClassLoader cl = new URLClassLoader(urls);
+            Class<Plugin> cls = (Class<Plugin>) cl.loadClass("plugins.AthlonixPlugin");
+            Plugin plugin = cls.getDeclaredConstructor().newInstance();
+            plugin.load();
+            PluginManager.plugins.add(plugin);
+        } catch (Exception e) {
+            System.out.println("Error while adding plugin " + pluginJar.getName());
+        }
+    }
+
+    public static void laodOnePlugin(String name) {
+        String pluginPath = PLUGIN_DIRECTORY + "/" + name + ".jar";
+        File pluginFile = new File(pluginPath);
+        if(!pluginFile.exists()) {
+            System.out.println("fail to find plugin at " + pluginPath);
+        }
+
+        Plugin plugin = plugins.stream().filter(item -> item.getName().equals(name)).findFirst().orElse(null);
+        if(plugin != null) {
+            System.out.println("plugin is already loaded");
+            return;
+        }
+
+        addPlugin(pluginFile);
     }
 
 
@@ -59,7 +81,9 @@ public class PluginManager {
         return existingPlugins;
     }
 
-    public static void deletePlugin(String name) {
+    public static void deletePlugin(String name) throws IOException {
+        unloadPlugin(name);
+
         String pluginPath = PLUGIN_DIRECTORY + "/" + name + ".jar";
         File pluginFile = new File(pluginPath);
         if(!pluginFile.exists()) {
@@ -72,4 +96,20 @@ public class PluginManager {
             System.out.println("Failed to delete the file");
         }
     }
+
+    public static void unloadPlugin(String name) throws IOException {
+        Plugin plugin = plugins.stream().filter(item -> item.getName().equals(name)).findFirst().orElse(null);
+        if(plugin == null) {
+            return;
+        }
+
+        plugin.unload();
+        plugins.remove(plugin);
+        ClassLoader cl = plugin.getClass().getClassLoader();
+        if (cl instanceof URLClassLoader) {
+            ((URLClassLoader) cl).close();
+        }
+    }
+
+
 }
