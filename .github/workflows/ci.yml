@@ -21,4 +21,4 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run tests with Maven
-        run: mvn -B test --file app/pom.xml -Dstyle.color=always
+        run: mvn -B test --file pom.xml -Dstyle.color=always
