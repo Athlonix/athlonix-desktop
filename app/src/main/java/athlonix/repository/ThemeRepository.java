@@ -1,5 +1,6 @@
 package athlonix.repository;
 
+import athlonix.AppSettings;
 import athlonix.FileDownloader;
 import athlonix.auth.ServerQuerier;
 import athlonix.models.Theme;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class ThemeRepository {
 
-    final static String SERVER_URL = "http://localhost:8086";
+    final static String SERVER_URL = AppSettings.getServerURL();
 
     public List<Theme> getAllThemes() throws IOException, URISyntaxException, InterruptedException {
 

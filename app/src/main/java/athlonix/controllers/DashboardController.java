@@ -64,7 +64,21 @@ public class DashboardController implements Initializable {
     }
     @FXML
     void showPluginsSettings(ActionEvent event) {
-        System.out.println("settings select");
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/plugins-view.fxml"));
+            Parent root = fxmlLoader.load();
+            PluginViewController downloadViewControlerr = fxmlLoader.getController();
+
+            Scene scene = SceneLoader.GetScene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Plugins settings");
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            System.out.println("failed to load themes page");
+        }
     }
 
 

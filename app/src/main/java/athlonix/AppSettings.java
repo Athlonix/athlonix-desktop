@@ -9,6 +9,7 @@ public class AppSettings {
     public static final String SETTINGS_FILE_PATH = "./settings.txt";
     public static final String themesDirectory = "app/themes";
     static private String theme;
+    static private final String serverURL = "http://localhost:8086";
 
     public static String getTheme() {
         if(theme.equals("default")) {
@@ -16,6 +17,10 @@ public class AppSettings {
         }
 
         return theme;
+    }
+
+    public static String getServerURL() {
+        return serverURL;
     }
 
     public static void loadConfiguration() throws IOException {

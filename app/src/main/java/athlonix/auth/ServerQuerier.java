@@ -1,5 +1,7 @@
 package athlonix.auth;
 
+import athlonix.AppSettings;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -10,7 +12,7 @@ import java.time.Duration;
 
 public class ServerQuerier {
 
-    final static String SERVER_URL = "http://localhost:8086";
+    final static String SERVER_URL = AppSettings.getServerURL();
 
     public static HttpResponse<String> postRequest(String route,String jsonBody) throws IOException, InterruptedException, URISyntaxException {
 
