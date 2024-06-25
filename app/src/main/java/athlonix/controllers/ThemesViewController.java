@@ -73,7 +73,7 @@ public class ThemesViewController implements Initializable {
             AppSettings.setTheme(selectedTheme);
             Stage currentStage = (Stage) saveButton.getScene().getWindow();
             currentStage.close();
-            dashboardController.reload();
+            dashboardController.refreshTheme();
         } catch (Exception e) {
             System.out.println("failed to reload");
         }

@@ -1,8 +1,9 @@
 package athlonix.controllers;
 
+import athlonix.HelloApplication;
 import athlonix.Plugin;
 import athlonix.PluginManager;
-import athlonix.SceneLoader;
+import athlonix.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +16,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -30,16 +34,14 @@ public class DashboardController implements Initializable {
     @FXML
     private MenuButton button_settings;
 
+    List<Button> allPluginsButtons = new ArrayList<>();
+
     @FXML
     void handleSettingsClick(ActionEvent event) {
 
     }
     @FXML
     void handleLogout(ActionEvent event) {
-
-    }
-    @FXML
-    void showActivityPage(ActionEvent event) {
 
     }
 
@@ -52,7 +54,7 @@ public class DashboardController implements Initializable {
             ThemesViewController themeViewController = fxmlLoader.getController();
             themeViewController.dashboardController=this;
 
-            Scene scene = SceneLoader.GetScene(root);
+            Scene scene = SceneManager.GetScene(root);
             Stage stage = new Stage();
             stage.setTitle("Themes settings");
             stage.setScene(scene);
@@ -71,7 +73,7 @@ public class DashboardController implements Initializable {
             PluginViewController pluginViewController = fxmlLoader.getController();
             pluginViewController.dashboardController=this;
 
-            Scene scene = SceneLoader.GetScene(root);
+            Scene scene = SceneManager.GetScene(root);
             Stage stage = new Stage();
             stage.setTitle("Plugins settings");
             stage.setScene(scene);
@@ -83,10 +85,15 @@ public class DashboardController implements Initializable {
     }
 
 
-    public void showActivityPage() throws IOException {
-        Parent fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/activity-page.fxml")));
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(fxml);
+    @FXML
+    void showActivityPage(ActionEvent event) throws IOException {
+       try {
+           Parent fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/activity-page.fxml")));
+           contentArea.getChildren().removeAll();
+           contentArea.getChildren().setAll(fxml);
+       } catch (IOException e) {
+           System.out.println("failed to load activities");
+       }
     }
 
     @Override
@@ -109,10 +116,16 @@ public class DashboardController implements Initializable {
             });
 
             dashboardMenu.getChildren().add(pluginButton);
+            allPluginsButtons.add(pluginButton);
         }
     }
 
     public void reload() throws IOException {
+        dashboardMenu.getChildren().removeAll(allPluginsButtons);
+        initialize(null,null);
+    }
+    
+    public void refreshTheme() throws IOException {
         Stage stage = (Stage) dashboardMenu.getScene().getWindow();
         stage.close();
         openDashboard();
@@ -125,7 +138,7 @@ public class DashboardController implements Initializable {
 
         DashboardController dashboardController = fxmlLoader.getController();
 
-        Scene scene = SceneLoader.GetScene(root);
+        Scene scene = SceneManager.GetScene(root);
         Stage stage = new Stage();
         stage.setTitle("dashboard");
         stage.setScene(scene);

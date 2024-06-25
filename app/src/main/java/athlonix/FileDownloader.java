@@ -21,7 +21,7 @@ public class FileDownloader {
         Parent root = fxmlLoader.load();
         DownloadViewControlerr downloadViewControlerr = fxmlLoader.getController();
 
-        Scene scene = SceneLoader.GetScene(root);
+        Scene scene = SceneManager.GetScene(root);
         Stage stage = new Stage();
         stage.setTitle("download");
         stage.setScene(scene);
