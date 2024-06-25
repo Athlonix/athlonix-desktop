@@ -1,6 +1,6 @@
 package athlonix.controllers;
 
-import athlonix.SceneLoader;
+import athlonix.SceneManager;
 import athlonix.auth.Authenticator;
 import athlonix.auth.LoginException;
 import athlonix.auth.NetworkChecker;
@@ -118,7 +118,7 @@ public class LoginController implements Initializable {
 
         DashboardController dashboardController = fxmlLoader.getController();
 
-        Scene scene = SceneLoader.GetScene(root);
+        Scene scene = SceneManager.GetScene(root);
         Stage stage = new Stage();
         stage.setTitle("dashboard");
         stage.setScene(scene);

@@ -1,5 +1,5 @@
 package athlonix.controllers;
-import athlonix.SceneLoader;
+import athlonix.SceneManager;
 import athlonix.auth.APIQuerier;
 import athlonix.repository.TaskRepository;
 import athlonix.repository.TeamRepository;
@@ -285,7 +285,7 @@ public class ActivityController {
         addMemberController.setActivityController(this);
         addMemberController.fillActivityData();
 
-        Scene addMemberScene = SceneLoader.GetScene(root);
+        Scene addMemberScene = SceneManager.GetScene(root);
         Stage stage = new Stage();
         stage.setTitle("Add team member to activity");
         stage.setScene(addMemberScene);
@@ -301,7 +301,7 @@ public class ActivityController {
         taskController.fillData(task, activity.getId());
         taskController.setActivityController(this);
 
-        Scene editTaskScene = SceneLoader.GetScene(root);
+        Scene editTaskScene = SceneManager.GetScene(root);
         Stage stage = new Stage();
         stage.setTitle(task.getTitle());
         stage.setScene(editTaskScene);

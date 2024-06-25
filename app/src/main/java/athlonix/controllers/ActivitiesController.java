@@ -1,6 +1,6 @@
 package athlonix.controllers;
 
-import athlonix.SceneLoader;
+import athlonix.SceneManager;
 import athlonix.auth.NetworkChecker;
 import athlonix.models.Activity;
 import athlonix.models.Sport;
@@ -202,7 +202,7 @@ public class ActivitiesController implements Initializable {
         activityController.setActivity(activity);
         activityController.fillActivityData();
 
-        Scene scene = SceneLoader.GetScene(root);
+        Scene scene = SceneManager.GetScene(root);
         Stage stage = new Stage();
         stage.setTitle(activity.getName());
         stage.setScene(scene);

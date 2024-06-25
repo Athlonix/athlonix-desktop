@@ -95,6 +95,7 @@ public class PluginManager {
         } else {
             System.out.println("Failed to delete the file");
         }
+
     }
 
     public static void unloadPlugin(String name) throws IOException {
