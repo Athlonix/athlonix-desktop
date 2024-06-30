@@ -3,6 +3,7 @@ package athlonix;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
@@ -17,6 +18,12 @@ public class Main {
 
         try {
             Version mostRecentVersion = getMostRecentVersion();
+            String currentVersion = AppSettings.getCurrentVersion();
+            String mostRecentName = mostRecentVersion.getName();
+
+            if(currentVersion.compareTo(mostRecentName) < 0) {
+                System.out.println("new version available: " + mostRecentName);
+            }
             System.out.println(mostRecentVersion.getName());
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -34,9 +41,9 @@ public class Main {
         Gson gson = new Gson();
 
         JsonElement response = gson.fromJson(responseString, JsonElement.class);
-        JsonArray jsonData = response.getAsJsonArray();
+        JsonObject jsonData = response.getAsJsonObject();
 
-        Type versionType = new TypeToken<List<Version>>(){}.getType();
+        Type versionType = new TypeToken<Version>(){}.getType();
         return gson.fromJson(jsonData, versionType);
     }
 }
