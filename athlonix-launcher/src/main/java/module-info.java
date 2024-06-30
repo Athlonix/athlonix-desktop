@@ -3,6 +3,7 @@ module athlonix.athlonixlauncher {
     requires javafx.fxml;
     requires java.net.http;
     requires com.google.gson;
+    requires athlonix.athlonixdesktop;
 
 
     opens athlonix.athlonixlauncher to javafx.fxml;

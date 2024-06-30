@@ -60,10 +60,22 @@ public class HelloController implements Initializable {
 
     @FXML
     void updateApplication(ActionEvent event) {
+        FileDownloader fileDownloader = new FileDownloader();
+        Thread dl = null;
+        try {
+            dl = fileDownloader.downloadFile(ServerQuerier.SERVER_URL + "/version/" + newVersion,"./");
+            dl.join();
+            String zipPath = "./" + newVersion + ".zip";
+            String unzipFolder = "./" + newVersion;
+            Unzipper.unzip(zipPath, unzipFolder);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
     private String currentVersionDirectory;
+    private String newVersion;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -80,7 +92,8 @@ public class HelloController implements Initializable {
                 startApp();
             }
 
-            newVersionText.setText("Nouvelle version disponible : " + mostRecentName);
+            this.newVersion = mostRecentName;
+            newVersionText.setText("Nouvelle version disponible : " + newVersion);
 
             System.out.println(mostRecentVersion.getName());
         } catch (Exception e) {
