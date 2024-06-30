@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
@@ -27,13 +28,42 @@ public class HelloController implements Initializable {
 
     @FXML
     void ignoreUpdate(ActionEvent event) {
+        try {
+            startApp();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void startApp() throws IOException {
+        String appJarPath = currentVersionDirectory + "/app.jar";
+        String javaPath = "java";
+        String modulePath = "--module-path";
+        String modulePathValue = currentVersionDirectory + "/lib";
+        String addModules = "--add-modules";
+        String modules = "javafx.controls,javafx.fxml";
+        String jarOption = "-jar";
+
+        ProcessBuilder processBuilder = new ProcessBuilder(
+                javaPath, modulePath, modulePathValue, addModules, modules, jarOption, appJarPath
+        );
+
+        try {
+            Process process = processBuilder.start();
+
+            int exitCode = process.waitFor();
+            System.out.println("Process exited with code: " + exitCode);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void updateApplication(ActionEvent event) {
 
     }
+
+    private String currentVersionDirectory;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -42,10 +72,12 @@ public class HelloController implements Initializable {
         try {
             Version mostRecentVersion = getMostRecentVersion();
             String currentVersion = AppSettings.getCurrentVersion();
+            currentVersionDirectory = currentVersion;
             String mostRecentName = mostRecentVersion.getName();
 
             if(currentVersion.compareTo(mostRecentName) > 0) {
                 System.out.println("no recent version available");
+                startApp();
             }
 
             newVersionText.setText("Nouvelle version disponible : " + mostRecentName);
