@@ -1,6 +1,4 @@
-package athlonix;
-
-import athlonix.AppSettings;
+package athlonix.athlonixlauncher;
 
 import java.io.IOException;
 import java.net.URI;

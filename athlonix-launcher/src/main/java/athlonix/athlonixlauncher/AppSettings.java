@@ -1,11 +1,7 @@
-package athlonix;
+package athlonix.athlonixlauncher;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class AppSettings {
     static private final String serverURL = "http://localhost:8086";
