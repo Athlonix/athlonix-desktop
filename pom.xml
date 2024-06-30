@@ -12,6 +12,8 @@
   <modules>
     <module>app</module>
     <module>plugins</module>
+    <module>luancher</module>
+    <module>launcher</module>
   </modules>
 
   <properties>

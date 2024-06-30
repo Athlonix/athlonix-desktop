@@ -2,6 +2,7 @@ package plugins;
 
 
 import athlonix.Plugin;
+import javafx.scene.Scene;
 
 public class AthlonixPlugin implements Plugin {
 
@@ -19,6 +20,11 @@ public class AthlonixPlugin implements Plugin {
     @Override
     public void run() {
         System.out.println("hello from test plugin !!");
+    }
+
+    @Override
+    public Scene getScene() {
+        return null;
     }
 
     @Override
