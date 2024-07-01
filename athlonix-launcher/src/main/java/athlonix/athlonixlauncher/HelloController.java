@@ -4,11 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +18,9 @@ import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.http.HttpResponse;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -50,12 +55,11 @@ public class HelloController implements Initializable {
 
         try {
             Process process = processBuilder.start();
-
-            int exitCode = process.waitFor();
-            System.out.println("Process exited with code: " + exitCode);
-        } catch (IOException | InterruptedException e) {
+            Platform.exit();
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     @FXML
@@ -68,6 +72,20 @@ public class HelloController implements Initializable {
             String zipPath = "./" + newVersion + ".zip";
             String unzipFolder = "./" + newVersion;
             Unzipper.unzip(zipPath, unzipFolder);
+            File currentDirectory = new File("/" + currentVersionDirectory);
+            deleteDirectory(currentDirectory);
+
+            File file = new File(zipPath);
+
+            if (file.delete()) {
+                System.out.println("File deleted successfully");
+            }
+            else {
+                System.out.println("Failed to delete the file");
+            }
+
+            currentVersionDirectory = newVersion;
+            startApp();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -87,7 +105,7 @@ public class HelloController implements Initializable {
             currentVersionDirectory = currentVersion;
             String mostRecentName = mostRecentVersion.getName();
 
-            if(currentVersion.compareTo(mostRecentName) > 0) {
+            if(currentVersion.compareTo(mostRecentName) >= 0) {
                 System.out.println("no recent version available");
                 startApp();
             }
@@ -117,5 +135,15 @@ public class HelloController implements Initializable {
 
         Type versionType = new TypeToken<Version>(){}.getType();
         return gson.fromJson(jsonData, versionType);
+    }
+
+    boolean deleteDirectory(File directoryToBeDeleted) {
+        File[] allContents = directoryToBeDeleted.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteDirectory(file);
+            }
+        }
+        return directoryToBeDeleted.delete();
     }
 }
