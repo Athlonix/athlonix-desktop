@@ -45,11 +45,8 @@ public class LoginController implements Initializable {
     }
 
     private void validateLoginFormat() {
-//        String emailText = email.getText();
-//        String passwordText = password.getText();
-        String emailText = "admin@example.com";
-        String passwordText = "admin123!";
-
+        String emailText = email.getText();
+        String passwordText = password.getText();
         try {
             EmailValidator.validate(emailText);
             ResetEmailStatus();

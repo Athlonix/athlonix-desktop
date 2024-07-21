@@ -122,7 +122,7 @@ public class ThemesViewController implements Initializable {
         stackPane.setLayoutY(2.0);
         stackPane.setPrefHeight(168.0);
         stackPane.setPrefWidth(274.0);
-        String imageUrl = "http://localhost:8086/theme/image/"+theme.getName();
+        String imageUrl = "https://spingboot.jayllyz.fr/theme/image/"+theme.getName();
         stackPane.setStyle("-fx-background-image: url('"+imageUrl+"'); -fx-background-size: cover; -fx-background-radius: 8 8 8 8;");
         stackPane.toBack();
         Rectangle rec =  new javafx.scene.shape.Rectangle(pane.getPrefWidth(), pane.getPrefHeight());
@@ -150,7 +150,7 @@ public class ThemesViewController implements Initializable {
         stackPane.setPrefWidth(274.0);
         stackPane.toBack();
 
-        String imageUrl = "http://localhost:8086/theme/image/"+theme.getName();
+        String imageUrl = "https://spingboot.jayllyz.fr/theme/image/"+theme.getName();
         stackPane.setStyle("-fx-background-image: url('"+imageUrl+"'); -fx-background-size: cover; -fx-background-radius: 8 8 0 0;");
 
         String themeName = theme.getName() + " (" +(theme.getSize()) + ")";

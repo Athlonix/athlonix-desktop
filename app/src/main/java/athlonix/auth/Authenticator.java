@@ -12,7 +12,7 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 
 public class Authenticator {
-    final static String API_URL = "http://localhost:3101";
+    final static String API_URL = "https://athlonix-api.jayllyz.fr";
     static String AUTH_TOKEN = "";
     static String USER_ID;
     static String USER_NAME;

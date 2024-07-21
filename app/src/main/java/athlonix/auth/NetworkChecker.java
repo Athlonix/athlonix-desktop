@@ -5,7 +5,7 @@ import java.net.URLConnection;
 
 public class NetworkChecker {
 
-    private final static String API_URL = "http://localhost:3101";
+    private final static String API_URL = "https://athlonix-api.jayllyz.fr";
     public static boolean isOnline = false;
     public static void init() {
         try {

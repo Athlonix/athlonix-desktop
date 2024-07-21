@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Objects;
 
 public class AppSettings {
-    static private final String serverURL = "http://localhost:8086";
+    static private final String serverURL = "https://spingboot.jayllyz.fr";
 
 
     public static String getCurrentVersion() {

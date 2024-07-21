@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class APIQuerier {
 
-    final static String API_URL = "http://localhost:3101";
+    final static String API_URL = "https://athlonix-api.jayllyz.fr";
 
     public static HttpResponse<String> postRequest(String route,String jsonBody) throws IOException, InterruptedException, URISyntaxException {
 

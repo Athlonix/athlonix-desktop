@@ -13,6 +13,9 @@ public class HelloApplication extends Application {
 
 
         NetworkChecker.init();
+
+        boolean tt = NetworkChecker.isOnline;
+
         AppSettings.loadConfiguration();
         Scene loginScene = SceneManager.GetScene("login-view");
         stage.setTitle("Hello!");

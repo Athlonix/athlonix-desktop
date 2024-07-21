@@ -9,7 +9,7 @@ public class AppSettings {
     public static final String SETTINGS_FILE_PATH = "./settings.txt";
     public static final String themesDirectory = "app/themes";
     static private String theme;
-    static private final String serverURL = "http://localhost:8086";
+    static private final String serverURL = "https://spingboot.jayllyz.fr";
 
     public static String getTheme() {
         if(theme.equals("default")) {

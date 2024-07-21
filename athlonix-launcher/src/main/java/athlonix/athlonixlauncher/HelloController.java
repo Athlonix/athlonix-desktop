@@ -44,20 +44,21 @@ public class HelloController implements Initializable {
         String appJarPath = currentVersionDirectory + "/app.jar";
         String javaPath = "java";
         String modulePath = "--module-path";
-        String modulePathValue = currentVersionDirectory + "/lib";
+        String modulePathValue = "./lib";
         String addModules = "--add-modules";
         String modules = "javafx.controls,javafx.fxml";
         String jarOption = "-jar";
 
         ProcessBuilder processBuilder = new ProcessBuilder(
-                javaPath, modulePath, modulePathValue, addModules, modules, jarOption, appJarPath
+                javaPath, jarOption, modulePath, modulePathValue, addModules, modules, appJarPath
         );
 
         try {
+            System.out.println(processBuilder.command());
             Process process = processBuilder.start();
             Platform.exit();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("error " + e.getMessage());
         }
 
     }
@@ -105,6 +106,10 @@ public class HelloController implements Initializable {
             currentVersionDirectory = currentVersion;
             String mostRecentName = mostRecentVersion.getName();
 
+
+            System.out.println(currentVersion);
+            System.out.println(mostRecentName);
+
             if(currentVersion.compareTo(mostRecentName) >= 0) {
                 System.out.println("no recent version available");
                 startApp();
@@ -115,10 +120,13 @@ public class HelloController implements Initializable {
 
             System.out.println(mostRecentVersion.getName());
         } catch (Exception e) {
+            System.out.println("errrror " + e.getMessage());
             throw new RuntimeException(e);
         } finally {
             System.out.println("starting application.");
         }
+
+
     }
 
     private static Version getMostRecentVersion() throws IOException, URISyntaxException, InterruptedException {
