@@ -169,7 +169,11 @@ public class ActivityController {
 
     @FXML
     void addTask(ActionEvent event) {
-
+        try {
+            showNewTaskPage();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void fillTasksData(String startDate, String endDate) {
@@ -288,6 +292,22 @@ public class ActivityController {
         Stage stage = new Stage();
         stage.setTitle("Add team member to activity");
         stage.setScene(addMemberScene);
+        stage.show();
+    }
+
+    private void showNewTaskPage() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/create-task-view.fxml"));
+        Parent root = fxmlLoader.load();
+
+        CreateTaskController createTaskController = fxmlLoader.getController();
+        createTaskController.setIdActivity(activity.getId());
+        createTaskController.fillData();
+
+        Scene createTaskScene = SceneManager.GetScene(root);
+        Stage stage = new Stage();
+        stage.setTitle("Creer une tache");
+        stage.setScene(createTaskScene);
+
         stage.show();
     }
 
