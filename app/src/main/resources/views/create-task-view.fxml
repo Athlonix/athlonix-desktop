@@ -35,7 +35,7 @@
                 <Font size="14.0" />
             </font>
         </Text>
-        <Text fx:id="date" layoutX="212.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date : 12/12/1222">
+        <Text fx:id="date" layoutX="212.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0">
             <font>
                 <Font size="15.0" />
             </font>

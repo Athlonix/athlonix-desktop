@@ -301,7 +301,7 @@ public class ActivityController {
 
         CreateTaskController createTaskController = fxmlLoader.getController();
         createTaskController.setIdActivity(activity.getId());
-        createTaskController.fillData();
+        createTaskController.fillData(this);
 
         Scene createTaskScene = SceneManager.GetScene(root);
         Stage stage = new Stage();

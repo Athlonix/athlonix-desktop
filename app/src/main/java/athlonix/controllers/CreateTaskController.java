@@ -3,13 +3,14 @@ package athlonix.controllers;
 import athlonix.SceneManager;
 import athlonix.models.ActivityOccurence;
 import athlonix.models.TeamMember;
+import athlonix.repository.ActivityOccurenceRepository;
+import athlonix.repository.TaskRepository;
 import athlonix.repository.TeamRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,14 +20,10 @@ import javafx.util.Pair;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class CreateTaskController {
-
 
     @FXML
     private Button choose_date_button;
@@ -56,8 +53,11 @@ public class CreateTaskController {
 
     public ActivityOccurence activityOccurence;
 
-    public void fillData() {
+    public ActivityController activityController;
+
+    public void fillData(ActivityController activityController) {
         try {
+            this.activityController = activityController;
             buildChoices();
         } catch (Exception e) {
             System.out.println("failed to build choices for task creation");
@@ -141,10 +141,29 @@ public class CreateTaskController {
 
     void setOccurence(ActivityOccurence activityOccurence) {
         this.activityOccurence = activityOccurence;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        date.setText(formatter.format(activityOccurence.getDate()));
     }
 
     @FXML
     void saveTask(ActionEvent event) {
+        ActivityOccurenceRepository activityOccurenceRepository = new ActivityOccurenceRepository();
+        TaskRepository taskRepository = new TaskRepository();
+        try {
+            int idOccurence = activityOccurenceRepository.createActivityException(idActivity, activityOccurence);
+            String titleS = title.getText();
+            String priorityS = priority.getValue();
+            String statusS = status.getValue();
+            String descriptionS = description.getText();
+            int memberId = members.getValue().getValue();
+            taskRepository.createTask(idOccurence,priorityS,statusS,titleS,descriptionS,memberId);
+            activityController.refreshTask(null);
+            Stage stage = (Stage) title.getScene().getWindow();
+            stage.close();
+        } catch (Exception e) {
+            System.out.println("error while creating task : " + e.getMessage());
+        }
+
 
     }
 }

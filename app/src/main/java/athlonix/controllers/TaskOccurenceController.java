@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.text.SimpleDateFormat;
@@ -100,6 +101,8 @@ public class TaskOccurenceController {
                     addButton.getStyleClass().add("accent");
                     addButton.setOnAction(event -> {
                     createTaskController.setOccurence(occurence);
+                    Stage stage = (Stage) addButton.getScene().getWindow();
+                    stage.close();
                     });
 
                     setText(null);
@@ -141,7 +144,7 @@ public class TaskOccurenceController {
     }
 
     private String formatDateTime(Date date) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
         return formatter.format(date);
     }
