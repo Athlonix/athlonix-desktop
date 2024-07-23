@@ -48,9 +48,10 @@ public class HelloController implements Initializable {
         String addModules = "--add-modules";
         String modules = "javafx.controls,javafx.fxml";
         String jarOption = "-jar";
+        String versionName = currentVersionDirectory;
 
         ProcessBuilder processBuilder = new ProcessBuilder(
-                javaPath, jarOption, modulePath, modulePathValue, addModules, modules, appJarPath
+                javaPath, jarOption, modulePath, modulePathValue, addModules, modules, appJarPath,currentVersionDirectory
         );
 
         try {
@@ -73,7 +74,7 @@ public class HelloController implements Initializable {
             String zipPath = "./" + newVersion + ".zip";
             String unzipFolder = "./" + newVersion;
             Unzipper.unzip(zipPath, unzipFolder);
-            File currentDirectory = new File("/" + currentVersionDirectory);
+            File currentDirectory = new File("./" + currentVersionDirectory);
             deleteDirectory(currentDirectory);
 
             File file = new File(zipPath);
@@ -101,14 +102,32 @@ public class HelloController implements Initializable {
         System.out.println("starting athlonix launcher!");
 
         try {
-            Version mostRecentVersion = getMostRecentVersion();
             String currentVersion = AppSettings.getCurrentVersion();
             currentVersionDirectory = currentVersion;
+
+            NetworkChecker.init();
+            System.out.println("network : " + NetworkChecker.isOnline);
+            if(!NetworkChecker.isOnline) {
+                System.out.println("not connected to server.");
+                try {
+                    startApp();
+                    return;
+                } catch (IOException e) {
+                    System.out.println("failed to start app");
+                    System.out.println(e.getMessage());
+                }
+            }
+
+
+            Version mostRecentVersion = getMostRecentVersion();
             String mostRecentName = mostRecentVersion.getName();
 
 
-            System.out.println(currentVersion);
-            System.out.println(mostRecentName);
+            String currV = currentVersion.split("-")[1];
+            String remoteV = mostRecentName.split("-")[1];
+
+            System.out.println("current version : " +currV);
+            System.out.println("remote version : " + remoteV);
 
             if(currentVersion.compareTo(mostRecentName) >= 0) {
                 System.out.println("no recent version available");

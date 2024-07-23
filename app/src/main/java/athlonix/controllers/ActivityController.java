@@ -129,7 +129,7 @@ public class ActivityController {
         this.activity = activity;
     }
 
-    public void fillActivityData() {
+    public void fillActivityData() throws IOException, URISyntaxException, InterruptedException {
         activity_description.setText(activity.getDescription());
         activity_name.setText(activity.getName());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -138,16 +138,15 @@ public class ActivityController {
         activity_sport.setText(activity.getSport().getName());
         number_participants.setText("De " + activity.getMinParticipants() + " à " + activity.getMaxParticipants());
 
-        try {
-            if(activity.getIdAddress() == 0) {
-              throw new RuntimeException();
-            }
-            Adress adress = getActivityAdress(activity.getIdAddress());
-            fillAdressInformations(adress);
+        System.out.println("add -> " + activity.getIdAddress());
 
-        } catch (Exception e) {
+        if(activity.getIdAddress() == 0) {
             adressTab.getChildren().clear();
             adressTab.getChildren().add(new Text("Aucune adresse trouvée associée à cette activité"));
+        } else {
+        Adress adress = getActivityAdress(activity.getIdAddress());
+        fillAdressInformations(adress);
+
         }
 
         fillTeamData();

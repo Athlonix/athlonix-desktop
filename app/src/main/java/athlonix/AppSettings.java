@@ -10,6 +10,7 @@ public class AppSettings {
     public static final String themesDirectory = "app/themes";
     static private String theme;
     static private final String serverURL = "https://spingboot.jayllyz.fr";
+    public static String appVersion = "";
 
     public static String getTheme() {
         if(theme.equals("default")) {
@@ -63,5 +64,9 @@ public class AppSettings {
         }
 
         return existingThemes;
+    }
+
+    public static void setVersion(String version) {
+        appVersion = version;
     }
 }

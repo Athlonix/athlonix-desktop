@@ -1,6 +1,8 @@
 package athlonix.athlonixlauncher;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class AppSettings {
@@ -18,10 +20,22 @@ public class AppSettings {
             if(!file.startsWith("athlonix-")) {
                 continue;
             }
-            return file;
+
+
+            if(version.isEmpty()) {
+                version = file;
+            }
+
+            if(version.compareTo(file) < 0) {
+                version = file;
+            }
         }
 
-        return null;
+        if(version.isEmpty()) {
+            return null;
+        }
+
+        return version;
     }
 
     public static String getServerUrl() {

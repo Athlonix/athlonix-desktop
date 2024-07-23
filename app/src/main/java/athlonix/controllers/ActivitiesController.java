@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -139,6 +140,9 @@ public class ActivitiesController implements Initializable {
         sportColumn.setCellValueFactory(cellData -> {
             Activity activity = cellData.getValue();
             Sport sport = activity.getSport();
+            if(sport == null) {
+                return new SimpleStringProperty("aucun");
+            }
             return new SimpleStringProperty(sport.getName());
         });
 
@@ -172,7 +176,7 @@ public class ActivitiesController implements Initializable {
 
                             try {
                                 showActivityPage(activity);
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
                         });
@@ -193,7 +197,7 @@ public class ActivitiesController implements Initializable {
 
     }
 
-    private void showActivityPage(Activity activity) throws IOException {
+    private void showActivityPage(Activity activity) throws IOException, URISyntaxException, InterruptedException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/single-activity-view.fxml"));
         Parent root = fxmlLoader.load();

@@ -18,12 +18,17 @@ public class HelloApplication extends Application {
 
         AppSettings.loadConfiguration();
         Scene loginScene = SceneManager.GetScene("login-view");
-        stage.setTitle("Hello!");
+        stage.setTitle(AppSettings.appVersion);
         stage.setScene(loginScene);
         stage.show();
     }
 
     public static void main(String[] args) {
+        if(args.length > 0) {
+            AppSettings.setVersion(args[0]);
+        } else {
+            AppSettings.setVersion("Athlonix");
+        }
         PluginManager.loadPlugins();
         launch();
     }
